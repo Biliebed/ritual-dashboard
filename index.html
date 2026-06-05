@@ -23,6 +23,57 @@
             --accent-orange: #f59e0b;
         }
         
+        [data-theme="light"] {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --border: rgba(0, 0, 0, 0.08);
+            --text-primary: #1a1a2e;
+            --text-secondary: #6b7280;
+        }
+        
+        [data-theme="light"] .grid-bg {
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+        }
+        
+        [data-theme="light"] .orb-1 { background: rgba(139,92,246,0.15); }
+        [data-theme="light"] .orb-2 { background: rgba(59,130,246,0.15); }
+        
+        [data-theme="light"] .sidebar { background: #ffffff; border-right-color: rgba(0,0,0,0.08); }
+        [data-theme="light"] .nav-item:hover { background: rgba(0,0,0,0.03); }
+        [data-theme="light"] .nav-item.active { background: rgba(139, 92, 246, 0.1); }
+        [data-theme="light"] .sidebar-footer { background: #f8f9fa; }
+        
+        [data-theme="light"] .stat-card { background: #ffffff; }
+        [data-theme="light"] .stat-card:hover { border-color: rgba(139, 92, 246, 0.4); }
+        [data-theme="light"] .panel { background: #ffffff; }
+        [data-theme="light"] .metric-card { background: #ffffff; }
+        
+        [data-theme="light"] .agents-table th { color: #6b7280; border-bottom-color: rgba(0,0,0,0.08); }
+        [data-theme="light"] .agents-table td { border-bottom-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .agents-table tr:hover td { background: rgba(0,0,0,0.02); }
+        
+        [data-theme="light"] .activity-item { border-bottom-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .notif-item { border-bottom-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .notif-item.unread { background: rgba(139, 92, 246, 0.05); }
+        
+        [data-theme="light"] .progress-bar { background: #e5e7eb; }
+        [data-theme="light"] .detail-item { background: #f8f9fa; }
+        [data-theme="light"] .detail-chart { background: #f8f9fa; }
+        
+        [data-theme="light"] .search-box { background: #ffffff; }
+        [data-theme="light"] .search-box kbd { background: #f3f4f6; color: #6b7280; }
+        [data-theme="light"] .notification-bell { background: #ffffff; }
+        [data-theme="light"] .theme-toggle { background: #ffffff; }
+        [data-theme="light"] .dropdown-menu { background: #ffffff; }
+        [data-theme="light"] .dropdown-item:hover { background: rgba(0,0,0,0.03); }
+        [data-theme="light"] .modal { background: #ffffff; }
+        [data-theme="light"] .modal-header { border-bottom-color: rgba(0,0,0,0.08); }
+        [data-theme="light"] .modal-footer { border-top-color: rgba(0,0,0,0.08); }
+        [data-theme="light"] .toast { background: #ffffff; border-color: rgba(0,0,0,0.08); }
+        
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-primary);
@@ -99,6 +150,15 @@
         
         /* ===== NOTIFICATION BELL ===== */
         .notification-wrapper { position: relative; }
+        
+        .theme-toggle {
+            width: 40px; height: 40px; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s; font-size: 18px;
+        }
+        .theme-toggle:hover { background: rgba(255,255,255,0.05); border-color: var(--accent-purple); transform: rotate(15deg); }
+        [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.05); }
         
         .notification-bell {
             width: 40px; height: 40px; background: var(--bg-card);
@@ -357,6 +417,11 @@
                         <kbd>⌘K</kbd>
                     </div>
                     
+                    <!-- THEME TOGGLE -->
+                    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Theme">
+                        <span class="theme-icon" id="themeIcon">🌙</span>
+                    </div>
+                    
                     <!-- NOTIFICATION BELL -->
                     <div class="notification-wrapper">
                         <div class="notification-bell" onclick="toggleNotifications()">
@@ -540,6 +605,25 @@
             dropdown.classList.toggle('show');
             renderNotifications();
         }
+        
+        // ===== THEME TOGGLE =====
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        
+        function toggleTheme() {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            document.getElementById('themeIcon').textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+            
+            // Redraw charts with new theme
+            setTimeout(() => { drawLineChart(); drawPieChart(); }, 100);
+            
+            showToast(currentTheme === 'dark' ? '🌙 Dark theme enabled' : '☀️ Light theme enabled');
+        }
+        
+        // Apply saved theme on load
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        document.getElementById('themeIcon').textContent = currentTheme === 'dark' ? '🌙' : '☀️';
         
         function renderNotifications() {
             const list = document.getElementById('notifList');
