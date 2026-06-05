@@ -577,6 +577,81 @@
         [data-theme="light"] .logs-search input { background: #ffffff; color: var(--text-primary); }
         [data-theme="light"] .log-entry:hover { background: rgba(0,0,0,0.02); }
         
+        /* ===== KEYBOARD SHORTCUTS ===== */
+        .shortcuts-modal {
+            max-width: 700px;
+        }
+        
+        .shortcuts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        
+        .shortcut-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-purple);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .shortcut-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+        
+        .shortcut-keys {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .shortcut-keys kbd {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            height: 28px;
+            padding: 0 8px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+        
+        .shortcut-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .shortcuts-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .shortcuts-hint kbd {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+        }
+        
+        [data-theme="light"] .shortcut-keys kbd { background: #f3f4f6; border-color: #e5e7eb; }
+        [data-theme="light"] .shortcuts-hint kbd { background: #f3f4f6; border-color: #e5e7eb; }
+        
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0,0,0,0.7);
@@ -917,7 +992,91 @@
         <span class="toast-icon" id="toastIcon">✅</span>
         <span class="toast-text" id="toastText">Action completed</span>
     </div>
-
+    
+    <!-- Keyboard Shortcuts Modal -->
+    <div class="modal-overlay" id="shortcutsModal">
+        <div class="modal shortcuts-modal">
+            <div class="modal-header">
+                <h2>⌨️ Keyboard Shortcuts</h2>
+                <button class="modal-close" onclick="closeShortcutsModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="shortcuts-grid">
+                    <div class="shortcut-section">
+                        <h3>General</h3>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>?</kbd></span>
+                            <span class="shortcut-desc">Show keyboard shortcuts</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>⌘</kbd> + <kbd>K</kbd></span>
+                           <span class="shortcut-desc">Focus search</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>ESC</kbd></span>
+                            <span class="shortcut-desc">Close modal / dropdown</span>
+                        </div>
+                    </div>
+                    
+                    <div class="shortcut-section">
+                        <h3>Navigation</h3>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>1</kbd></span>
+                            <span class="shortcut-desc">Dashboard</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>2</kbd></span>
+                            <span class="shortcut-desc">Agents</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>3</kbd></span>
+                            <span class="shortcut-desc">Transactions</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>4</kbd></span>
+                            <span class="shortcut-desc">Performance</span>
+                        </div>
+                    </div>
+                    
+                    <div class="shortcut-section">
+                        <h3>Actions</h3>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>D</kbd></span>
+                            <span class="shortcut-desc">Deploy new agent</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>E</kbd></span>
+                            <span class="shortcut-desc">Export data</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>N</kbd></span>
+                            <span class="shortcut-desc">Toggle notifications</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>T</kbd></span>
+                            <span class="shortcut-desc">Toggle theme</span>
+                        </div>
+                    </div>
+                    
+                    <div class="shortcut-section">
+                        <h3>Logs</h3>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>L</kbd></span>
+                            <span class="shortcut-desc">Clear logs</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="shortcut-keys"><kbd>⇧</kbd> + <kbd>E</kbd></span>
+                            <span class="shortcut-desc">Export logs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span class="shortcuts-hint">Press <kbd>?</kbd> anywhere to show this dialog</span>
+                <button class="btn btn-ghost" onclick="closeShortcutsModal()">Close</button>
+            </div>
+        </div>
+    </div>
     <script>
         // ===== DATA =====
         let agents = [
@@ -1573,6 +1732,117 @@
         renderLogs();
         setTimeout(() => { drawLineChart(); drawPieChart(); drawGasChart(); updateGasPrices(); }, 100);
         window.addEventListener('resize', () => { drawLineChart(); drawPieChart(); drawGasChart(); });
+        
+        // ===== KEYBOARD SHORTCUTS =====
+        function openShortcutsModal() {
+            document.getElementById('shortcutsModal').classList.add('active');
+        }
+        
+        function closeShortcutsModal() {
+            document.getElementById('shortcutsModal').classList.remove('active');
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            // Don't trigger shortcuts when typing in input fields
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                // Only allow ESC to work in inputs
+                if (e.key === 'Escape') {
+                    e.target.blur();
+                    closeShortcutsModal();
+                    closeAllModals();
+                }
+                return;
+            }
+            
+            // Check if any modal is open
+            const anyModalOpen = document.getElementById('agentModal').classList.contains('active') || 
+                                 document.getElementById('shortcutsModal').classList.contains('active');
+            
+            // ESC - Close modals
+            if (e.key === 'Escape') {
+                closeShortcutsModal();
+                closeAllModals();
+                return;
+            }
+            
+            // Don't process other shortcuts if modal is open
+            if (anyModalOpen) return;
+            
+            // ? - Show shortcuts
+            if (e.key === '?' || (e.shiftKey && e.key === '/')) {
+                e.preventDefault();
+                openShortcutsModal();
+                return;
+            }
+            
+            // Ctrl/Cmd + K - Focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+                return;
+            }
+            
+            // D - Deploy agent
+            if (e.key === 'd' || e.key === 'D') {
+                e.preventDefault();
+                deployAgent();
+                return;
+            }
+            
+            // E - Export dropdown
+            if (e.key === 'e' && !e.shiftKey) {
+                e.preventDefault();
+                toggleDropdown();
+                return;
+            }
+            
+            // Shift + E - Export logs
+            if (e.key === 'E' && e.shiftKey) {
+                e.preventDefault();
+                exportLogs();
+                return;
+            }
+            
+            // N - Toggle notifications
+            if (e.key === 'n' || e.key === 'N') {
+                e.preventDefault();
+                toggleNotifications();
+                return;
+            }
+            
+            // T - Toggle theme
+            if (e.key === 't' || e.key === 'T') {
+                e.preventDefault();
+                toggleTheme();
+                return;
+            }
+            
+            // L - Clear logs
+            if (e.key === 'l' || e.key === 'L') {
+                e.preventDefault();
+                clearLogs();
+                return;
+            }
+            
+            // 1-4 - Navigation
+            if (e.key >= '1' && e.key <= '4') {
+                e.preventDefault();
+                const navItems = document.querySelectorAll('.nav-item');
+                const index = parseInt(e.key) - 1;
+                if (navItems[index]) {
+                    navItems.forEach(item => item.classList.remove('active'));
+                    navItems[index].classList.add('active');
+                    showToast(`📍 Navigated to ${navItems[index].textContent.trim()}`);
+                }
+                return;
+            }
+        });
+        
+        function closeAllModals() {
+            document.getElementById('agentModal').classList.remove('active');
+            document.getElementById('notifDropdown').classList.remove('show');
+            document.getElementById('exportMenu').classList.remove('show');
+        }
     </script>
 </body>
 </html>
