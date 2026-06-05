@@ -263,6 +263,119 @@
         .chart-container { padding: 20px; height: 250px; }
         .chart-container canvas { width: 100% !important; height: 100% !important; }
         
+        /* ===== GAS PRICE TRACKER ===== */
+        .gas-tracker-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .gas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .gas-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .gas-icon { font-size: 20px; }
+        
+        .gas-update-time {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .gas-prices {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .gas-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .gas-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .gas-card.low { border-top: 3px solid var(--accent-green); }
+        .gas-card.average { border-top: 3px solid var(--accent-blue); }
+        .gas-card.high { border-top: 3px solid var(--accent-orange); }
+        .gas-card.fast { border-top: 3px solid #ef4444; }
+        
+        .gas-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .gas-value {
+            font-size: 32px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1;
+        }
+        
+        .gas-card.low .gas-value { color: var(--accent-green); }
+        .gas-card.average .gas-value { color: var(--accent-blue); }
+        .gas-card.high .gas-value { color: var(--accent-orange); }
+        .gas-card.fast .gas-value { color: #ef4444; }
+        
+        .gas-unit {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        .gas-est {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .gas-chart-container {
+            height: 100px;
+            margin-bottom: 16px;
+        }
+        
+        .gas-chart-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        .gas-recommendation {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        
+        .rec-icon { font-size: 16px; }
+        
+        [data-theme="light"] .gas-card { background: #f8f9fa; }
+        [data-theme="light"] .gas-recommendation { background: rgba(139, 92, 246, 0.08); }
+        
         .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 32px; }
         .agents-table { width: 100%; }
         .agents-table th { text-align: left; padding: 12px 20px; font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
@@ -489,6 +602,50 @@
                 <div class="panel">
                     <div class="panel-header"><div class="panel-title">Agent Status</div></div>
                     <div class="chart-container"><canvas id="pieChart"></canvas></div>
+                </div>
+            </div>
+            
+            <!-- GAS PRICE TRACKER -->
+            <div class="gas-tracker-panel">
+                <div class="gas-header">
+                    <div class="gas-title">
+                        <span class="gas-icon">⛽</span>
+                        <span>Gas Price Tracker</span>
+                    </div>
+                    <div class="gas-update-time" id="gasUpdateTime">Updated just now</div>
+                </div>
+                <div class="gas-prices">
+                    <div class="gas-card low">
+                        <div class="gas-label">🐌 Low</div>
+                        <div class="gas-value" id="gasLow">12</div>
+                        <div class="gas-unit">Gwei</div>
+                        <div class="gas-est">~$0.45</div>
+                    </div>
+                    <div class="gas-card average">
+                        <div class="gas-label">🚶 Average</div>
+                        <div class="gas-value" id="gasAvg">24</div>
+                        <div class="gas-unit">Gwei</div>
+                        <div class="gas-est">~$0.89</div>
+                    </div>
+                    <div class="gas-card high">
+                        <div class="gas-label">🏃 High</div>
+                        <div class="gas-value" id="gasHigh">45</div>
+                        <div class="gas-unit">Gwei</div>
+                        <div class="gas-est">~$1.67</div>
+                    </div>
+                    <div class="gas-card fast">
+                        <div class="gas-label">🚀 Fast</div>
+                        <div class="gas-value" id="gasFast">68</div>
+                        <div class="gas-unit">Gwei</div>
+                        <div class="gas-est">~$2.52</div>
+                    </div>
+                </div>
+                <div class="gas-chart-container">
+                    <canvas id="gasChart"></canvas>
+                </div>
+                <div class="gas-recommendation" id="gasRecommendation">
+                    <span class="rec-icon">💡</span>
+                    <span>Recommended: <strong>Average</strong> - Good balance of speed and cost</span>
                 </div>
             </div>
             
@@ -929,12 +1086,146 @@
             txEl.textContent = tx.toLocaleString();
         }, 3000);
         
+        // ===== GAS PRICE TRACKER =====
+        let gasData = {
+            low: 12,
+            avg: 24,
+            high: 45,
+            fast: 68,
+            history: []
+        };
+        
+        // Generate initial history
+        for (let i = 0; i < 24; i++) {
+            gasData.history.push({
+                time: i,
+                low: Math.floor(Math.random() * 10) + 8,
+                avg: Math.floor(Math.random() * 15) + 18,
+                high: Math.floor(Math.random() * 20) + 35,
+                fast: Math.floor(Math.random() * 25) + 55
+            });
+        }
+        
+        function updateGasPrices() {
+            // Simulate price changes
+            gasData.low = Math.max(5, gasData.low + Math.floor(Math.random() * 5) - 2);
+            gasData.avg = Math.max(15, gasData.avg + Math.floor(Math.random() * 7) - 3);
+            gasData.high = Math.max(30, gasData.high + Math.floor(Math.random() * 10) - 5);
+            gasData.fast = Math.max(50, gasData.fast + Math.floor(Math.random() * 12) - 6);
+            
+            // Update DOM
+            document.getElementById('gasLow').textContent = gasData.low;
+            document.getElementById('gasAvg').textContent = gasData.avg;
+            document.getElementById('gasHigh').textContent = gasData.high;
+            document.getElementById('gasFast').textContent = gasData.fast;
+            
+            // Update estimates (assuming 21000 gas for simple transfer)
+            const ethPrice = 3500; // Mock ETH price
+            document.querySelector('.gas-card.low .gas-est').textContent = '~$' + ((gasData.low * 21000 * ethPrice) / 1e9).toFixed(2);
+            document.querySelector('.gas-card.average .gas-est').textContent = '~$' + ((gasData.avg * 21000 * ethPrice) / 1e9).toFixed(2);
+            document.querySelector('.gas-card.high .gas-est').textContent = '~$' + ((gasData.high * 21000 * ethPrice) / 1e9).toFixed(2);
+            document.querySelector('.gas-card.fast .gas-est').textContent = '~$' + ((gasData.fast * 21000 * ethPrice) / 1e9).toFixed(2);
+            
+            // Update recommendation
+            updateGasRecommendation();
+            
+            // Update history
+            gasData.history.push({
+                time: gasData.history.length,
+                low: gasData.low,
+                avg: gasData.avg,
+                high: gasData.high,
+                fast: gasData.fast
+            });
+            if (gasData.history.length > 24) gasData.history.shift();
+            
+            // Redraw chart
+            drawGasChart();
+            
+            // Update timestamp
+            document.getElementById('gasUpdateTime').textContent = 'Updated just now';
+        }
+        
+        function updateGasRecommendation() {
+            const rec = document.getElementById('gasRecommendation');
+            let text, icon;
+            
+            if (gasData.avg < 20) {
+                icon = '🟢';
+                text = 'Recommended: <strong>Low</strong> - Network is quiet, great time for transactions!';
+            } else if (gasData.avg < 35) {
+                icon = '🟡';
+                text = 'Recommended: <strong>Average</strong> - Good balance of speed and cost';
+            } else if (gasData.avg < 50) {
+                icon = '🟠';
+                text = 'Recommended: <strong>Average</strong> - Network is busy, consider waiting';
+            } else {
+                icon = '🔴';
+                text = 'Recommended: <strong>Wait</strong> - Gas is very high, try again later';
+            }
+            
+            rec.innerHTML = `<span class="rec-icon">${icon}</span><span>${text}</span>`;
+        }
+        
+        function drawGasChart() {
+            const canvas = document.getElementById('gasChart');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = canvas.offsetWidth;
+            const h = canvas.height = canvas.offsetHeight;
+            const pad = { top: 10, right: 10, bottom: 20, left: 30 };
+            const cw = w - pad.left - pad.right;
+            const ch = h - pad.top - pad.bottom;
+            
+            const allValues = gasData.history.flatMap(d => [d.low, d.avg, d.high, d.fast]);
+            const max = Math.max(...allValues) * 1.1;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            // Grid
+            ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i <= 3; i++) {
+                const y = pad.top + (ch / 3) * i;
+                ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(w - pad.right, y); ctx.stroke();
+            }
+            
+            // Draw lines
+            const colors = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444'];
+            const keys = ['low', 'avg', 'high', 'fast'];
+            
+            keys.forEach((key, ki) => {
+                ctx.beginPath();
+                gasData.history.forEach((d, i) => {
+                    const x = pad.left + (cw / (gasData.history.length - 1)) * i;
+                    const y = pad.top + ch - (d[key] / max) * ch;
+                    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                });
+                ctx.strokeStyle = colors[ki];
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+            
+            // Labels
+            ctx.fillStyle = 'rgba(255,255,255,0.4)';
+            ctx.font = '9px Inter';
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 3; i++) {
+                const val = Math.round(max - (max / 3) * i);
+                const y = pad.top + (ch / 3) * i;
+                ctx.fillText(val + '', pad.left - 5, y + 3);
+            }
+        }
+        
+        // Update gas prices every 5 seconds
+        setInterval(updateGasPrices, 5000);
+        
         // ===== INIT =====
         renderAgents();
         renderActivity();
         renderNotifications();
-        setTimeout(() => { drawLineChart(); drawPieChart(); }, 100);
-        window.addEventListener('resize', () => { drawLineChart(); drawPieChart(); });
+        setTimeout(() => { drawLineChart(); drawPieChart(); drawGasChart(); updateGasPrices(); }, 100);
+        window.addEventListener('resize', () => { drawLineChart(); drawPieChart(); drawGasChart(); });
     </script>
 </body>
 </html>
