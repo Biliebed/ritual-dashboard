@@ -416,6 +416,167 @@
         .progress-fill.green { background: linear-gradient(90deg, var(--accent-green), var(--accent-blue)); }
         .progress-fill.purple { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
         
+        /* ===== AGENT LOGS ===== */
+        .logs-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-top: 24px;
+            overflow: hidden;
+        }
+        
+        .logs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .logs-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .logs-icon { font-size: 20px; }
+        
+        .logs-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .logs-filter {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .logs-filter select {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .logs-filter select:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+        }
+        
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+        
+        .logs-search input {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            width: 180px;
+        }
+        
+        .logs-search input:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+        }
+        
+        .logs-search input::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        .logs-container {
+            height: 300px;
+            overflow-y: auto;
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            background: var(--bg-primary);
+        }
+        
+        .log-entry {
+            display: flex;
+            gap: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            transition: background 0.2s;
+        }
+        
+        .log-entry:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .log-entry.info { border-left: 3px solid var(--accent-blue); }
+        .log-entry.warn { border-left: 3px solid var(--accent-orange); }
+        .log-entry.error { border-left: 3px solid #ef4444; }
+        .log-entry.debug { border-left: 3px solid var(--accent-purple); }
+        
+        .log-time {
+            color: var(--text-secondary);
+            white-space: nowrap;
+            min-width: 80px;
+        }
+        
+        .log-level {
+            font-weight: 600;
+            min-width: 50px;
+            text-transform: uppercase;
+        }
+        
+        .log-entry.info .log-level { color: var(--accent-blue); }
+        .log-entry.warn .log-level { color: var(--accent-orange); }
+        .log-entry.error .log-level { color: #ef4444; }
+        .log-entry.debug .log-level { color: var(--accent-purple); }
+        
+        .log-agent {
+            color: var(--accent-green);
+            min-width: 120px;
+        }
+        
+        .log-message {
+            color: var(--text-primary);
+            flex: 1;
+            word-break: break-word;
+        }
+        
+        .logs-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .logs-auto-scroll label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        
+        .logs-auto-scroll input[type="checkbox"] {
+            accent-color: var(--accent-purple);
+        }
+        
+        [data-theme="light"] .logs-container { background: #f8f9fa; }
+        [data-theme="light"] .logs-filter select { background: #ffffff; color: var(--text-primary); }
+        [data-theme="light"] .logs-search input { background: #ffffff; color: var(--text-primary); }
+        [data-theme="light"] .log-entry:hover { background: rgba(0,0,0,0.02); }
+        
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0,0,0,0.7);
@@ -687,6 +848,47 @@
                     <div class="progress-bar"><div class="progress-fill purple" style="width: 42%"></div></div>
                 </div>
             </div>
+            
+            <!-- AGENT LOGS -->
+            <div class="logs-panel">
+                <div class="logs-header">
+                    <div class="logs-title">
+                        <span class="logs-icon">📜</span>
+                        <span>Agent Logs</span>
+                    </div>
+                    <div class="logs-actions">
+                        <div class="logs-filter">
+                            <select id="logLevelFilter" onchange="filterLogs()">
+                                <option value="all">All Levels</option>
+                                <option value="info">Info</option>
+                                <option value="warn">Warning</option>
+                                <option value="error">Error</option>
+                                <option value="debug">Debug</option>
+                            </select>
+                            <select id="logAgentFilter" onchange="filterLogs()">
+                                <option value="all">All Agents</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-ghost btn-sm" onclick="clearLogs()">🗑️ Clear</button>
+                        <button class="btn btn-ghost btn-sm" onclick="exportLogs()">📥 Export</button>
+                        <div class="logs-search">
+                            <input type="text" id="logSearchInput" placeholder="Search logs..." oninput="filterLogs()">
+                        </div>
+                    </div>
+                </div>
+                <div class="logs-container" id="logsContainer">
+                    <!-- Logs will be rendered here -->
+                </div>
+                <div class="logs-footer">
+                    <span id="logsCount">0 entries</span>
+                    <span class="logs-auto-scroll">
+                        <label>
+                            <input type="checkbox" id="autoScrollLogs" checked> Auto-scroll
+                        </label>
+                    </span>
+                </div>
+            </div>
+            
         </main>
     </div>
     
@@ -1048,6 +1250,7 @@
             activities.unshift({ type: 'deploy', icon: '+', text: `<strong>${name}</strong> deployed successfully`, time: 'just now' });
             addNotification('success', '🚀', `<strong>${name}</strong> deployed successfully`);
             renderAgents(); renderActivity(); drawPieChart();
+            updateAgentFilter();
             showToast('🚀 Agent deployed successfully!');
         }
         
@@ -1085,6 +1288,149 @@
             tx += Math.floor(Math.random() * 5);
             txEl.textContent = tx.toLocaleString();
         }, 3000);
+        
+        // ===== AGENT LOGS =====
+        let logs = [];
+        let logIdCounter = 0;
+        
+        const logMessages = {
+            info: [
+                'Task completed successfully',
+                'Model inference started',
+                'Checkpoint saved',
+                'Connection established',
+                'Data sync completed',
+                'Health check passed',
+                'Batch processing started',
+                'Cache updated'
+            ],
+            warn: [
+                'High memory usage detected',
+                'Slow response time',
+                'Rate limit approaching',
+                'Connection unstable',
+                'Retry attempt #2',
+                'Queue depth increasing'
+            ],
+            error: [
+                'Connection timeout',
+                'Task failed: out of memory',
+                'API rate limit exceeded',
+                'Model load failed',
+                'Network unreachable',
+                'Transaction reverted'
+            ],
+            debug: [
+                'Initializing worker thread',
+                'Loading model weights',
+                'Allocating memory buffer',
+                'Parsing input data',
+                'Configuring network settings'
+            ]
+        };
+        
+        function generateLog() {
+            const levels = ['info', 'info', 'info', 'info', 'warn', 'warn', 'error', 'debug'];
+            const level = levels[Math.floor(Math.random() * levels.length)];
+            const agent = agents[Math.floor(Math.random() * agents.length)];
+            const messages = logMessages[level];
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            
+            return {
+                id: logIdCounter++,
+                time: new Date().toLocaleTimeString('en-US', { hour12: false }),
+                level,
+                agent: agent.name,
+                message
+            };
+        }
+        
+        function addLog(log) {
+            logs.push(log);
+            if (logs.length > 500) logs.shift();
+            renderLogs();
+        }
+        
+        function renderLogs() {
+            const container = document.getElementById('logsContainer');
+            const levelFilter = document.getElementById('logLevelFilter').value;
+            const agentFilter = document.getElementById('logAgentFilter').value;
+            const searchQuery = document.getElementById('logSearchInput').value.toLowerCase();
+            
+            let filtered = logs;
+            
+            if (levelFilter !== 'all') {
+                filtered = filtered.filter(l => l.level === levelFilter);
+            }
+            
+            if (agentFilter !== 'all') {
+                filtered = filtered.filter(l => l.agent === agentFilter);
+            }
+            
+            if (searchQuery) {
+                filtered = filtered.filter(l => 
+                    l.message.toLowerCase().includes(searchQuery) ||
+                    l.agent.toLowerCase().includes(searchQuery)
+                );
+            }
+            
+            container.innerHTML = filtered.map(log => `
+                <div class="log-entry ${log.level}">
+                    <span class="log-time">${log.time}</span>
+                    <span class="log-level">${log.level}</span>
+                    <span class="log-agent">[${log.agent}]</span>
+                    <span class="log-message">${log.message}</span>
+                </div>
+            `).join('');
+            
+            document.getElementById('logsCount').textContent = `${filtered.length} entries`;
+            
+            // Auto-scroll
+            if (document.getElementById('autoScrollLogs').checked) {
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+        
+        function filterLogs() {
+            renderLogs();
+        }
+        
+        function clearLogs() {
+            logs = [];
+            renderLogs();
+            showToast('🗑️ Logs cleared');
+        }
+        
+        function exportLogs() {
+            const logText = logs.map(l => `[${l.time}] [${l.level.toUpperCase()}] [${l.agent}] ${l.message}`).join('\n');
+            downloadFile(logText, 'agent-logs.txt', 'text/plain');
+            showToast('📥 Logs exported');
+        }
+        
+        function updateAgentFilter() {
+            const select = document.getElementById('logAgentFilter');
+            const currentVal = select.value;
+            select.innerHTML = '<option value="all">All Agents</option>';
+            agents.forEach(a => {
+                select.innerHTML += `<option value="${a.name}">${a.name}</option>`;
+            });
+            select.value = currentVal;
+        }
+        
+        // Generate initial logs
+        for (let i = 0; i < 20; i++) {
+            const log = generateLog();
+            log.time = new Date(Date.now() - (20 - i) * 60000).toLocaleTimeString('en-US', { hour12: false });
+            logs.push(log);
+        }
+        
+        // Add new logs periodically
+        setInterval(() => {
+            addLog(generateLog());
+        }, 3000);
+        
+        // Update agent filter when agents change
+        updateAgentFilter();
         
         // ===== GAS PRICE TRACKER =====
         let gasData = {
@@ -1224,6 +1570,7 @@
         renderAgents();
         renderActivity();
         renderNotifications();
+        renderLogs();
         setTimeout(() => { drawLineChart(); drawPieChart(); drawGasChart(); updateGasPrices(); }, 100);
         window.addEventListener('resize', () => { drawLineChart(); drawPieChart(); drawGasChart(); });
     </script>
