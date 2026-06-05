@@ -31,26 +31,17 @@
             overflow-x: hidden;
         }
         
-        /* ===== GRID BACKGROUND ===== */
         .grid-bg {
-            position: fixed;
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
             background-image: 
                 linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
             background-size: 50px 50px;
-            pointer-events: none;
-            z-index: 0;
+            pointer-events: none; z-index: 0;
         }
         
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            pointer-events: none;
-            z-index: 0;
-        }
+        .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
         .orb-1 { width: 400px; height: 400px; background: rgba(139,92,246,0.3); top: -100px; right: -100px; animation: float 20s ease-in-out infinite; }
         .orb-2 { width: 300px; height: 300px; background: rgba(59,130,246,0.3); bottom: -50px; left: -50px; animation: float 15s ease-in-out infinite reverse; }
         @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, -30px); } }
@@ -59,23 +50,15 @@
         
         /* ===== SIDEBAR ===== */
         .sidebar {
-            width: 260px;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border);
-            padding: 24px 16px;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 100;
+            width: 260px; background: var(--bg-secondary); border-right: 1px solid var(--border);
+            padding: 24px 16px; display: flex; flex-direction: column;
+            position: fixed; height: 100vh; overflow-y: auto; z-index: 100;
             transition: transform 0.3s ease;
         }
-        
         .logo { display: flex; align-items: center; gap: 12px; padding: 0 8px; margin-bottom: 32px; }
         .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .logo-text { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
-        .logo-text span { color: var(--text-secondary); font-weight: 400; font-size: 12px; display: block; letter-spacing: 0; }
+        .logo-text { font-size: 18px; font-weight: 700; }
+        .logo-text span { color: var(--text-secondary); font-weight: 400; font-size: 12px; display: block; }
         
         .nav-section { margin-bottom: 24px; }
         .nav-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; padding: 0 8px; margin-bottom: 8px; }
@@ -91,38 +74,19 @@
         .status-dot { width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; animation: pulse 2s ease infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         
-        /* ===== HAMBURGER MENU ===== */
         .hamburger {
-            display: none;
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            z-index: 200;
-            width: 40px;
-            height: 40px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
+            display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+            width: 40px; height: 40px; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: 8px;
+            cursor: pointer; align-items: center; justify-content: center; font-size: 20px;
         }
+        .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; }
+        .sidebar-overlay.active { display: block; }
         
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 90;
-        }
-        
-        /* ===== MAIN CONTENT ===== */
         .main { flex: 1; margin-left: 260px; padding: 24px 32px; }
         
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
-        .header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
         .header h1 span { color: var(--text-secondary); font-weight: 400; }
         
         .header-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
@@ -133,17 +97,83 @@
         .search-box input::placeholder { color: var(--text-secondary); }
         .search-box kbd { background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 11px; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; }
         
+        /* ===== NOTIFICATION BELL ===== */
+        .notification-wrapper { position: relative; }
+        
+        .notification-bell {
+            width: 40px; height: 40px; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s; font-size: 18px;
+            position: relative;
+        }
+        .notification-bell:hover { background: rgba(255,255,255,0.05); border-color: var(--accent-purple); }
+        
+        .notification-badge {
+            position: absolute; top: -6px; right: -6px;
+            background: #ef4444; color: white;
+            font-size: 10px; font-weight: 700;
+            min-width: 18px; height: 18px;
+            border-radius: 9px; display: flex;
+            align-items: center; justify-content: center;
+            padding: 0 4px; animation: badgePulse 2s ease infinite;
+        }
+        .notification-badge.hidden { display: none; }
+        @keyframes badgePulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        
+        .notification-dropdown {
+            display: none; position: absolute; top: calc(100% + 8px); right: 0;
+            width: 360px; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: 12px;
+            z-index: 50; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: dropdownIn 0.2s ease;
+        }
+        .notification-dropdown.show { display: block; }
+        @keyframes dropdownIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .notif-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid var(--border); }
+        .notif-header h3 { font-size: 14px; font-weight: 600; }
+        .notif-mark-read { font-size: 12px; color: var(--accent-purple); cursor: pointer; background: none; border: none; }
+        .notif-mark-read:hover { text-decoration: underline; }
+        
+        .notif-list { max-height: 320px; overflow-y: auto; }
+        
+        .notif-item {
+            display: flex; gap: 12px; padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer; transition: background 0.2s;
+        }
+        .notif-item:hover { background: rgba(255,255,255,0.02); }
+        .notif-item.unread { background: rgba(139, 92, 246, 0.05); }
+        .notif-item:last-child { border-bottom: none; }
+        
+        .notif-icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+        }
+        .notif-icon.success { background: rgba(16, 185, 129, 0.1); }
+        .notif-icon.warning { background: rgba(245, 158, 11, 0.1); }
+        .notif-icon.error { background: rgba(239, 68, 68, 0.1); }
+        .notif-icon.info { background: rgba(59, 130, 246, 0.1); }
+        
+        .notif-content { flex: 1; min-width: 0; }
+        .notif-text { font-size: 13px; line-height: 1.5; }
+        .notif-text strong { color: var(--accent-purple); }
+        .notif-time { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+        .notif-dot { width: 8px; height: 8px; background: var(--accent-purple); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+        
+        .notif-footer { padding: 12px 16px; text-align: center; border-top: 1px solid var(--border); }
+        .notif-footer a { font-size: 13px; color: var(--accent-purple); text-decoration: none; }
+        .notif-footer a:hover { text-decoration: underline; }
+        
         .btn { padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s; }
         .btn-primary { background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); color: white; }
         .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
         .btn-ghost { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); }
         .btn-ghost:hover { background: rgba(255,255,255,0.05); }
-        .btn-danger { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
-        .btn-danger:hover { background: rgba(239,68,68,0.2); }
         
-        /* ===== STATS GRID ===== */
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
-        
         .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s; }
         .stat-card:hover { border-color: rgba(139, 92, 246, 0.3); transform: translateY(-2px); }
         .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
@@ -151,7 +181,6 @@
         .stat-card:nth-child(2)::before { background: linear-gradient(90deg, var(--accent-green), var(--accent-blue)); }
         .stat-card:nth-child(3)::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
         .stat-card:nth-child(4)::before { background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink)); }
-        
         .stat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .stat-label { font-size: 13px; color: var(--text-secondary); }
         .stat-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
@@ -159,49 +188,38 @@
         .stat-card:nth-child(2) .stat-icon { background: rgba(16, 185, 129, 0.1); }
         .stat-card:nth-child(3) .stat-icon { background: rgba(139, 92, 246, 0.1); }
         .stat-card:nth-child(4) .stat-icon { background: rgba(245, 158, 11, 0.1); }
-        .stat-value { font-size: 32px; font-weight: 700; font-family: 'JetBrains Mono', monospace; letter-spacing: -1px; }
+        .stat-value { font-size: 32px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
         .stat-change { display: flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 12px; }
         .stat-change.positive { color: var(--accent-green); }
         
-        /* ===== CHARTS GRID ===== */
         .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 32px; }
-        
         .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
         .panel-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border); }
         .panel-title { font-size: 16px; font-weight: 600; }
-        
         .panel-tabs { display: flex; gap: 4px; }
         .panel-tab { padding: 6px 12px; border-radius: 6px; font-size: 13px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
         .panel-tab:hover { color: var(--text-primary); }
         .panel-tab.active { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
-        
         .chart-container { padding: 20px; height: 250px; }
         .chart-container canvas { width: 100% !important; height: 100% !important; }
         
-        /* ===== CONTENT GRID ===== */
         .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 32px; }
-        
-        /* ===== AGENTS TABLE ===== */
         .agents-table { width: 100%; }
         .agents-table th { text-align: left; padding: 12px 20px; font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
         .agents-table td { padding: 14px 20px; font-size: 14px; border-bottom: 1px solid var(--border); }
         .agents-table tr:last-child td { border-bottom: none; }
         .agents-table tr:hover td { background: rgba(255,255,255,0.02); cursor: pointer; }
-        
         .agent-info { display: flex; align-items: center; gap: 12px; }
         .agent-avatar { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
         .agent-name { font-weight: 500; }
         .agent-id { font-size: 12px; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; }
-        
         .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
         .status-badge.active { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
         .status-badge.idle { background: rgba(245, 158, 11, 0.1); color: var(--accent-orange); }
         .status-badge.error { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
         .status-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-        
         .mono { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
         
-        /* ===== ACTIVITY FEED ===== */
         .activity-list { padding: 16px 20px; max-height: 400px; overflow-y: auto; }
         .activity-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
         .activity-item:last-child { border-bottom: none; }
@@ -215,11 +233,9 @@
         .activity-text strong { color: var(--accent-purple); }
         .activity-time { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
         
-        /* ===== BOTTOM GRID ===== */
         .bottom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-        .metric-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .metric-title { font-size: 14px; color: var(--text-secondary); }
+        .metric-title { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; }
         .metric-value { font-size: 24px; font-weight: 700; font-family: 'JetBrains Mono', monospace; margin-bottom: 12px; }
         .progress-bar { height: 6px; background: var(--bg-primary); border-radius: 3px; overflow: hidden; }
         .progress-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
@@ -227,83 +243,66 @@
         .progress-fill.green { background: linear-gradient(90deg, var(--accent-green), var(--accent-blue)); }
         .progress-fill.purple { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
         
-        /* ===== MODAL ===== */
         .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.7);
+            z-index: 1000; justify-content: center; align-items: center;
             backdrop-filter: blur(5px);
         }
         .modal-overlay.active { display: flex; }
-        
         .modal {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: modalIn 0.3s ease;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; width: 90%; max-width: 600px;
+            max-height: 80vh; overflow-y: auto; animation: modalIn 0.3s ease;
         }
         @keyframes modalIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
         .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border); }
         .modal-header h2 { font-size: 20px; font-weight: 700; }
         .modal-close { background: none; border: none; color: var(--text-secondary); font-size: 24px; cursor: pointer; padding: 4px 8px; border-radius: 6px; }
         .modal-close:hover { background: rgba(255,255,255,0.05); }
-        
         .modal-body { padding: 24px; }
-        
         .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
         .detail-item { background: var(--bg-secondary); padding: 16px; border-radius: 10px; }
         .detail-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
         .detail-value { font-size: 18px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-        
-        .detail-chart { background: var(--bg-secondary); border-radius: 10px; padding: 16px; margin-top: 16px; }
+        .detail-chart { background: var(--bg-secondary); border-radius: 10px; padding: 16px; }
         .detail-chart h3 { font-size: 14px; margin-bottom: 12px; color: var(--text-secondary); }
-        
         .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 12px; justify-content: flex-end; }
+        .btn-danger { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+        .btn-danger:hover { background: rgba(239,68,68,0.2); }
         
-        /* ===== EXPORT DROPDOWN ===== */
         .dropdown { position: relative; }
         .dropdown-menu { display: none; position: absolute; top: 100%; right: 0; margin-top: 8px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; min-width: 160px; z-index: 50; }
         .dropdown-menu.show { display: block; }
         .dropdown-item { padding: 10px 16px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
         .dropdown-item:hover { background: rgba(255,255,255,0.05); }
         
-        /* ===== TOAST ===== */
-        .toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; display: flex; align-items: center; gap: 12px; z-index: 2000; animation: toastIn 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .toast {
+            position: fixed; bottom: 24px; right: 24px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 10px; padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px;
+            z-index: 2000; animation: toastIn 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
         .toast.hidden { display: none; }
         @keyframes toastIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .toast-icon { font-size: 20px; }
-        .toast-text { font-size: 14px; }
         
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 1200px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .charts-grid { grid-template-columns: 1fr; }
-            .content-grid { grid-template-columns: 1fr; }
+            .charts-grid, .content-grid { grid-template-columns: 1fr; }
             .bottom-grid { grid-template-columns: 1fr; }
         }
-        
         @media (max-width: 768px) {
             .sidebar { transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
-            .sidebar-overlay.active { display: block; }
             .hamburger { display: flex; }
             .main { margin-left: 0; padding: 80px 16px 16px; }
             .header h1 { font-size: 22px; }
             .search-box { width: 100%; }
             .stats-grid { grid-template-columns: 1fr; }
             .detail-grid { grid-template-columns: 1fr; }
-            .agents-table { font-size: 12px; }
-            .agents-table th, .agents-table td { padding: 10px 12px; }
+            .notification-dropdown { width: 300px; right: -40px; }
         }
         
         ::-webkit-scrollbar { width: 6px; }
@@ -316,45 +315,38 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     
-    <!-- Hamburger Menu -->
     <button class="hamburger" onclick="toggleSidebar()">☰</button>
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
     
     <div class="app">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <div class="logo-icon">◈</div>
                 <div class="logo-text">Ritual<span>Agent Dashboard</span></div>
             </div>
-            
             <div class="nav-section">
                 <div class="nav-label">Overview</div>
                 <div class="nav-item active"><span class="icon">◉</span> Dashboard</div>
                 <div class="nav-item"><span class="icon">◎</span> Network</div>
-                <div class="nav-item"><span class="icon">◈</span> Agents <span class="badge" id="agentCount">12</span></div>
+                <div class="nav-item"><span class="icon">◈</span> Agents <span class="badge" id="agentCount">6</span></div>
             </div>
-            
             <div class="nav-section">
                 <div class="nav-label">Analytics</div>
                 <div class="nav-item"><span class="icon">▣</span> Transactions</div>
                 <div class="nav-item"><span class="icon">◐</span> Performance</div>
                 <div class="nav-item"><span class="icon">◇</span> Research</div>
             </div>
-            
             <div class="nav-section">
                 <div class="nav-label">System</div>
                 <div class="nav-item"><span class="icon">⚙</span> Settings</div>
                 <div class="nav-item"><span class="icon">◈</span> Documentation</div>
             </div>
-            
             <div class="sidebar-footer">
                 <p>Network Status</p>
                 <div class="status"><div class="status-dot"></div> All Systems Operational</div>
             </div>
         </aside>
         
-        <!-- Main Content -->
         <main class="main">
             <div class="header">
                 <h1>Dashboard <span>/ Overview</span></h1>
@@ -364,55 +356,59 @@
                         <input type="text" id="searchInput" placeholder="Search agents..." oninput="filterAgents()">
                         <kbd>⌘K</kbd>
                     </div>
+                    
+                    <!-- NOTIFICATION BELL -->
+                    <div class="notification-wrapper">
+                        <div class="notification-bell" onclick="toggleNotifications()">
+                            🔔
+                            <div class="notification-badge" id="notifBadge">5</div>
+                        </div>
+                        <div class="notification-dropdown" id="notifDropdown">
+                            <div class="notif-header">
+                                <h3>Notifications</h3>
+                                <button class="notif-mark-read" onclick="markAllRead()">Mark all read</button>
+                            </div>
+                            <div class="notif-list" id="notifList"></div>
+                            <div class="notif-footer">
+                                <a href="#" onclick="viewAllNotifications()">View all notifications →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="dropdown">
                         <button class="btn btn-ghost" onclick="toggleDropdown()">📥 Export</button>
                         <div class="dropdown-menu" id="exportMenu">
                             <div class="dropdown-item" onclick="exportCSV()">📄 Export CSV</div>
                             <div class="dropdown-item" onclick="exportJSON()">📋 Export JSON</div>
-                            <div class="dropdown-item" onclick="exportPDF()">📑 Export PDF</div>
                         </div>
                     </div>
                     <button class="btn btn-primary" onclick="deployAgent()">+ Deploy Agent</button>
                 </div>
             </div>
             
-            <!-- Stats Grid -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Active Agents</span>
-                        <div class="stat-icon">◎</div>
-                    </div>
-                    <div class="stat-value" id="activeAgents">12</div>
+                    <div class="stat-header"><span class="stat-label">Active Agents</span><div class="stat-icon">◎</div></div>
+                    <div class="stat-value" id="activeAgents">4</div>
                     <div class="stat-change positive">↑ 3 from yesterday</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Transactions</span>
-                        <div class="stat-icon">▣</div>
-                    </div>
+                    <div class="stat-header"><span class="stat-label">Transactions</span><div class="stat-icon">▣</div></div>
                     <div class="stat-value" id="transactions">8,247</div>
                     <div class="stat-change positive">↑ 12.5% this week</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Total Value Locked</span>
-                        <div class="stat-icon">◐</div>
-                    </div>
+                    <div class="stat-header"><span class="stat-label">Total Value Locked</span><div class="stat-icon">◐</div></div>
                     <div class="stat-value">$2.4M</div>
                     <div class="stat-change positive">↑ 8.2% this month</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-header">
-                        <span class="stat-label">Uptime</span>
-                        <div class="stat-icon">◇</div>
-                    </div>
+                    <div class="stat-header"><span class="stat-label">Uptime</span><div class="stat-icon">◇</div></div>
                     <div class="stat-value">99.9%</div>
                     <div class="stat-change positive">Last 30 days</div>
                 </div>
             </div>
             
-            <!-- Charts -->
             <div class="charts-grid">
                 <div class="panel">
                     <div class="panel-header">
@@ -423,21 +419,14 @@
                             <div class="panel-tab" onclick="setChartPeriod('30d', this)">30d</div>
                         </div>
                     </div>
-                    <div class="chart-container">
-                        <canvas id="lineChart"></canvas>
-                    </div>
+                    <div class="chart-container"><canvas id="lineChart"></canvas></div>
                 </div>
                 <div class="panel">
-                    <div class="panel-header">
-                        <div class="panel-title">Agent Status</div>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="pieChart"></canvas>
-                    </div>
+                    <div class="panel-header"><div class="panel-title">Agent Status</div></div>
+                    <div class="chart-container"><canvas id="pieChart"></canvas></div>
                 </div>
             </div>
             
-            <!-- Content Grid -->
             <div class="content-grid">
                 <div class="panel">
                     <div class="panel-header">
@@ -449,41 +438,29 @@
                         </div>
                     </div>
                     <table class="agents-table">
-                        <thead>
-                            <tr>
-                                <th>Agent</th>
-                                <th>Status</th>
-                                <th>Tasks</th>
-                                <th>Gas Used</th>
-                                <th>Last Active</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>Agent</th><th>Status</th><th>Tasks</th><th>Gas Used</th><th>Last Active</th></tr></thead>
                         <tbody id="agentsTable"></tbody>
                     </table>
                 </div>
-                
                 <div class="panel">
-                    <div class="panel-header">
-                        <div class="panel-title">Live Activity</div>
-                    </div>
+                    <div class="panel-header"><div class="panel-title">Live Activity</div></div>
                     <div class="activity-list" id="activityFeed"></div>
                 </div>
             </div>
             
-            <!-- Bottom Metrics -->
             <div class="bottom-grid">
                 <div class="metric-card">
-                    <div class="metric-header"><span class="metric-title">AI Inference Load</span></div>
+                    <div class="metric-title">AI Inference Load</div>
                     <div class="metric-value">78%</div>
                     <div class="progress-bar"><div class="progress-fill blue" style="width: 78%"></div></div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-header"><span class="metric-title">Network Throughput</span></div>
+                    <div class="metric-title">Network Throughput</div>
                     <div class="metric-value">1.2k/s</div>
                     <div class="progress-bar"><div class="progress-fill green" style="width: 65%"></div></div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-header"><span class="metric-title">Memory Usage</span></div>
+                    <div class="metric-title">Memory Usage</div>
                     <div class="metric-value">42%</div>
                     <div class="progress-bar"><div class="progress-fill purple" style="width: 42%"></div></div>
                 </div>
@@ -506,15 +483,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger" onclick="closeModal()">Terminate</button>
+                <button class="btn btn-danger">Terminate</button>
                 <button class="btn btn-ghost" onclick="closeModal()">Close</button>
             </div>
         </div>
     </div>
     
-    <!-- Toast -->
     <div class="toast hidden" id="toast">
-        <span class="toast-icon">✅</span>
+        <span class="toast-icon" id="toastIcon">✅</span>
         <span class="toast-text" id="toastText">Action completed</span>
     </div>
 
@@ -538,49 +514,111 @@
             { type: 'transfer', icon: '↗', text: '<strong>Guardian-Net</strong> received 1.2 ETH reward', time: '32 minutes ago' },
         ];
         
+        // ===== NOTIFICATIONS =====
+        let notifications = [
+            { id: 1, type: 'error', icon: '⚠️', text: '<strong>Node-Keeper</strong> encountered connection timeout', time: '25 min ago', unread: true },
+            { id: 2, type: 'success', icon: '✅', text: '<strong>Sentinel-Alpha</strong> completed task batch #8472', time: '2 min ago', unread: true },
+            { id: 3, type: 'warning', icon: '⛽', text: 'Gas price spike detected: <strong>45 Gwei</strong>', time: '15 min ago', unread: true },
+            { id: 4, type: 'info', icon: '🚀', text: '<strong>Trader-Bot-X</strong> executed 5 trades successfully', time: '30 min ago', unread: true },
+            { id: 5, type: 'success', icon: '💰', text: '<strong>Guardian-Net</strong> received 1.2 ETH reward', time: '32 min ago', unread: true },
+            { id: 6, type: 'info', icon: '📦', text: 'New model checkpoint deployed by <strong>Oracle-Prime</strong>', time: '1 hour ago', unread: false },
+            { id: 7, type: 'warning', icon: '📊', text: '<strong>Data-Walker</strong> memory usage above 80%', time: '2 hours ago', unread: false },
+        ];
+        
         let currentFilter = 'all';
         let searchQuery = '';
         
-        // ===== SIDEBAR TOGGLE =====
+        // ===== SIDEBAR =====
         function toggleSidebar() {
             document.querySelector('.sidebar').classList.toggle('open');
             document.querySelector('.sidebar-overlay').classList.toggle('active');
         }
         
-        // ===== RENDER AGENTS =====
+        // ===== NOTIFICATIONS =====
+        function toggleNotifications() {
+            const dropdown = document.getElementById('notifDropdown');
+            dropdown.classList.toggle('show');
+            renderNotifications();
+        }
+        
+        function renderNotifications() {
+            const list = document.getElementById('notifList');
+            list.innerHTML = notifications.map(notif => `
+                <div class="notif-item ${notif.unread ? 'unread' : ''}" onclick="markNotifRead(${notif.id})">
+                    <div class="notif-icon ${notif.type}">${notif.icon}</div>
+                    <div class="notif-content">
+                        <div class="notif-text">${notif.text}</div>
+                        <div class="notif-time">${notif.time}</div>
+                    </div>
+                    ${notif.unread ? '<div class="notif-dot"></div>' : ''}
+                </div>
+            `).join('');
+            
+            updateNotifBadge();
+        }
+        
+        function markNotifRead(id) {
+            const notif = notifications.find(n => n.id === id);
+            if (notif) notif.unread = false;
+            renderNotifications();
+        }
+        
+        function markAllRead() {
+            notifications.forEach(n => n.unread = false);
+            renderNotifications();
+            showToast('✅ All notifications marked as read');
+        }
+        
+        function updateNotifBadge() {
+            const unreadCount = notifications.filter(n => n.unread).length;
+            const badge = document.getElementById('notifBadge');
+            badge.textContent = unreadCount;
+            badge.classList.toggle('hidden', unreadCount === 0);
+        }
+        
+        function addNotification(type, icon, text) {
+            notifications.unshift({
+                id: Date.now(),
+                type, icon, text,
+                time: 'just now',
+                unread: true
+            });
+            renderNotifications();
+        }
+        
+        function viewAllNotifications() {
+            showToast('📋 Viewing all notifications...');
+            toggleNotifications();
+        }
+        
+        // ===== CLOSE DROPDOWNS ON CLICK OUTSIDE =====
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.notification-wrapper')) {
+                document.getElementById('notifDropdown').classList.remove('show');
+            }
+            if (!e.target.closest('.dropdown')) {
+                document.getElementById('exportMenu').classList.remove('show');
+            }
+        });
+        
+        // ===== AGENTS =====
         function renderAgents() {
             let filtered = agents;
-            
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(a => a.status === currentFilter);
-            }
-            
+            if (currentFilter !== 'all') filtered = filtered.filter(a => a.status === currentFilter);
             if (searchQuery) {
                 const q = searchQuery.toLowerCase();
-                filtered = filtered.filter(a => 
-                    a.name.toLowerCase().includes(q) || 
-                    a.id.toLowerCase().includes(q)
-                );
+                filtered = filtered.filter(a => a.name.toLowerCase().includes(q) || a.id.toLowerCase().includes(q));
             }
             
-            const tbody = document.getElementById('agentsTable');
-            tbody.innerHTML = filtered.map((agent, idx) => `
+            document.getElementById('agentsTable').innerHTML = filtered.map((agent, idx) => `
                 <tr onclick="openAgentDetail(${agents.indexOf(agent)})">
                     <td>
                         <div class="agent-info">
                             <div class="agent-avatar" style="background: ${agent.color}20">${agent.avatar}</div>
-                            <div>
-                                <div class="agent-name">${agent.name}</div>
-                                <div class="agent-id">${agent.id}</div>
-                            </div>
+                            <div><div class="agent-name">${agent.name}</div><div class="agent-id">${agent.id}</div></div>
                         </div>
                     </td>
-                    <td>
-                        <span class="status-badge ${agent.status}">
-                            <span class="dot"></span>
-                            ${agent.status.charAt(0).toUpperCase() + agent.status.slice(1)}
-                        </span>
-                    </td>
+                    <td><span class="status-badge ${agent.status}"><span class="dot"></span>${agent.status.charAt(0).toUpperCase() + agent.status.slice(1)}</span></td>
                     <td class="mono">${agent.tasks.toLocaleString()}</td>
                     <td class="mono">${agent.gas}</td>
                     <td style="color: var(--text-secondary)">${agent.lastActive}</td>
@@ -591,7 +629,6 @@
             document.getElementById('activeAgents').textContent = agents.filter(a => a.status === 'active').length;
         }
         
-        // ===== FILTER =====
         function filterByStatus(status, el) {
             currentFilter = status;
             document.querySelectorAll('.content-grid .panel-tab').forEach(t => t.classList.remove('active'));
@@ -604,10 +641,8 @@
             renderAgents();
         }
         
-        // ===== RENDER ACTIVITY =====
         function renderActivity() {
-            const feed = document.getElementById('activityFeed');
-            feed.innerHTML = activities.map(act => `
+            document.getElementById('activityFeed').innerHTML = activities.map(act => `
                 <div class="activity-item">
                     <div class="activity-icon ${act.type}">${act.icon}</div>
                     <div class="activity-content">
@@ -624,82 +659,57 @@
             const ctx = canvas.getContext('2d');
             const w = canvas.width = canvas.offsetWidth;
             const h = canvas.height = canvas.offsetHeight;
-            
             const data = [45, 52, 38, 65, 78, 62, 85, 92, 78, 95, 88, 102];
             const labels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
-            
-            const padding = { top: 20, right: 20, bottom: 30, left: 40 };
-            const chartW = w - padding.left - padding.right;
-            const chartH = h - padding.top - padding.bottom;
+            const pad = { top: 20, right: 20, bottom: 30, left: 40 };
+            const cw = w - pad.left - pad.right;
+            const ch = h - pad.top - pad.bottom;
             const max = Math.max(...data) * 1.1;
             
             ctx.clearRect(0, 0, w, h);
-            
-            // Grid
             ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-            ctx.lineWidth = 1;
             for (let i = 0; i <= 4; i++) {
-                const y = padding.top + (chartH / 4) * i;
-                ctx.beginPath();
-                ctx.moveTo(padding.left, y);
-                ctx.lineTo(w - padding.right, y);
-                ctx.stroke();
+                const y = pad.top + (ch / 4) * i;
+                ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(w - pad.right, y); ctx.stroke();
             }
             
-            // Line
-            const gradient = ctx.createLinearGradient(0, padding.top, 0, h - padding.bottom);
-            gradient.addColorStop(0, 'rgba(139, 92, 246, 0.3)');
-            gradient.addColorStop(1, 'rgba(139, 92, 246, 0)');
+            const grad = ctx.createLinearGradient(0, pad.top, 0, h - pad.bottom);
+            grad.addColorStop(0, 'rgba(139, 92, 246, 0.3)');
+            grad.addColorStop(1, 'rgba(139, 92, 246, 0)');
             
             ctx.beginPath();
-            data.forEach((val, i) => {
-                const x = padding.left + (chartW / (data.length - 1)) * i;
-                const y = padding.top + chartH - (val / max) * chartH;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
+            data.forEach((v, i) => {
+                const x = pad.left + (cw / (data.length - 1)) * i;
+                const y = pad.top + ch - (v / max) * ch;
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
             });
-            
-            // Fill
-            ctx.lineTo(padding.left + chartW, padding.top + chartH);
-            ctx.lineTo(padding.left, padding.top + chartH);
+            ctx.lineTo(pad.left + cw, pad.top + ch);
+            ctx.lineTo(pad.left, pad.top + ch);
             ctx.closePath();
-            ctx.fillStyle = gradient;
+            ctx.fillStyle = grad;
             ctx.fill();
             
-            // Line stroke
             ctx.beginPath();
-            data.forEach((val, i) => {
-                const x = padding.left + (chartW / (data.length - 1)) * i;
-                const y = padding.top + chartH - (val / max) * chartH;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
+            data.forEach((v, i) => {
+                const x = pad.left + (cw / (data.length - 1)) * i;
+                const y = pad.top + ch - (v / max) * ch;
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
             });
             ctx.strokeStyle = '#8b5cf6';
             ctx.lineWidth = 2;
             ctx.stroke();
             
-            // Points
-            data.forEach((val, i) => {
-                const x = padding.left + (chartW / (data.length - 1)) * i;
-                const y = padding.top + chartH - (val / max) * chartH;
-                ctx.beginPath();
-                ctx.arc(x, y, 4, 0, Math.PI * 2);
-                ctx.fillStyle = '#8b5cf6';
-                ctx.fill();
-                ctx.beginPath();
-                ctx.arc(x, y, 2, 0, Math.PI * 2);
-                ctx.fillStyle = '#fff';
-                ctx.fill();
+            data.forEach((v, i) => {
+                const x = pad.left + (cw / (data.length - 1)) * i;
+                const y = pad.top + ch - (v / max) * ch;
+                ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fillStyle = '#8b5cf6'; ctx.fill();
+                ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill();
             });
             
-            // Labels
             ctx.fillStyle = 'rgba(255,255,255,0.4)';
             ctx.font = '10px Inter';
             ctx.textAlign = 'center';
-            labels.forEach((label, i) => {
-                const x = padding.left + (chartW / (data.length - 1)) * i;
-                ctx.fillText(label, x, h - 8);
-            });
+            labels.forEach((l, i) => ctx.fillText(l, pad.left + (cw / (data.length - 1)) * i, h - 8));
         }
         
         function drawPieChart() {
@@ -707,74 +717,37 @@
             const ctx = canvas.getContext('2d');
             const w = canvas.width = canvas.offsetWidth;
             const h = canvas.height = canvas.offsetHeight;
-            const centerX = w / 2;
-            const centerY = h / 2;
-            const radius = Math.min(w, h) / 2 - 30;
+            const cx = w / 2, cy = h / 2;
+            const r = Math.min(w, h) / 2 - 30;
             
-            const activeCount = agents.filter(a => a.status === 'active').length;
-            const idleCount = agents.filter(a => a.status === 'idle').length;
-            const errorCount = agents.filter(a => a.status === 'error').length;
+            const active = agents.filter(a => a.status === 'active').length;
+            const idle = agents.filter(a => a.status === 'idle').length;
+            const error = agents.filter(a => a.status === 'error').length;
             const total = agents.length;
             
             const slices = [
-                { value: activeCount, color: '#10b981', label: 'Active' },
-                { value: idleCount, color: '#f59e0b', label: 'Idle' },
-                { value: errorCount, color: '#ef4444', label: 'Error' },
+                { value: active, color: '#10b981', label: 'Active' },
+                { value: idle, color: '#f59e0b', label: 'Idle' },
+                { value: error, color: '#ef4444', label: 'Error' },
             ];
             
             ctx.clearRect(0, 0, w, h);
-            
-            let startAngle = -Math.PI / 2;
-            slices.forEach(slice => {
-                const sliceAngle = (slice.value / total) * 2 * Math.PI;
-                
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
-                ctx.closePath();
-                ctx.fillStyle = slice.color;
-                ctx.fill();
-                
-                // Label
-                const midAngle = startAngle + sliceAngle / 2;
-                const labelX = centerX + Math.cos(midAngle) * (radius * 0.65);
-                const labelY = centerY + Math.sin(midAngle) * (radius * 0.65);
-                ctx.fillStyle = '#fff';
-                ctx.font = 'bold 14px Inter';
-                ctx.textAlign = 'center';
-                ctx.fillText(slice.value, labelX, labelY);
-                
-                startAngle += sliceAngle;
+            let start = -Math.PI / 2;
+            slices.forEach(s => {
+                const angle = (s.value / total) * 2 * Math.PI;
+                ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r, start, start + angle); ctx.closePath();
+                ctx.fillStyle = s.color; ctx.fill();
+                const mid = start + angle / 2;
+                ctx.fillStyle = '#fff'; ctx.font = 'bold 14px Inter'; ctx.textAlign = 'center';
+                ctx.fillText(s.value, cx + Math.cos(mid) * (r * 0.65), cy + Math.sin(mid) * (r * 0.65));
+                start += angle;
             });
             
-            // Center hole
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius * 0.5, 0, Math.PI * 2);
-            ctx.fillStyle = '#16161f';
-            ctx.fill();
-            
-            // Center text
-            ctx.fillStyle = '#fff';
-            ctx.font = 'bold 24px JetBrains Mono';
-            ctx.textAlign = 'center';
-            ctx.fillText(total, centerX, centerY + 5);
-            ctx.font = '12px Inter';
-            ctx.fillStyle = 'rgba(255,255,255,0.5)';
-            ctx.fillText('Total', centerX, centerY + 22);
-            
-            // Legend
-            const legendY = h - 20;
-            const legendX = w / 2 - 80;
-            slices.forEach((slice, i) => {
-                ctx.fillStyle = slice.color;
-                ctx.beginPath();
-                ctx.arc(legendX + i * 60, legendY, 5, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.fillStyle = 'rgba(255,255,255,0.6)';
-                ctx.font = '10px Inter';
-                ctx.textAlign = 'left';
-                ctx.fillText(slice.label, legendX + i * 60 + 10, legendY + 4);
-            });
+            ctx.beginPath(); ctx.arc(cx, cy, r * 0.5, 0, Math.PI * 2); ctx.fillStyle = '#16161f'; ctx.fill();
+            ctx.fillStyle = '#fff'; ctx.font = 'bold 24px JetBrains Mono'; ctx.textAlign = 'center';
+            ctx.fillText(total, cx, cy + 5);
+            ctx.font = '12px Inter'; ctx.fillStyle = 'rgba(255,255,255,0.5)';
+            ctx.fillText('Total', cx, cy + 22);
         }
         
         function setChartPeriod(period, el) {
@@ -783,202 +756,101 @@
             drawLineChart();
         }
         
-        // ===== AGENT DETAIL MODAL =====
+        // ===== MODAL =====
         function openAgentDetail(idx) {
             const agent = agents[idx];
             document.getElementById('modalAgentName').textContent = agent.avatar + ' ' + agent.name;
-            
-            const grid = document.getElementById('detailGrid');
-            grid.innerHTML = `
-                <div class="detail-item">
-                    <div class="detail-label">Agent ID</div>
-                    <div class="detail-value" style="font-size:14px">${agent.id}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Status</div>
-                    <div class="detail-value"><span class="status-badge ${agent.status}"><span class="dot"></span>${agent.status}</span></div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Total Tasks</div>
-                    <div class="detail-value">${agent.tasks.toLocaleString()}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Gas Used</div>
-                    <div class="detail-value">${agent.gas}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">CPU Usage</div>
-                    <div class="detail-value">${agent.cpu}%</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Memory</div>
-                    <div class="detail-value">${agent.memory}%</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Network</div>
-                    <div class="detail-value" style="font-size:14px">${agent.network}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Last Active</div>
-                    <div class="detail-value" style="font-size:14px">${agent.lastActive}</div>
-                </div>
+            document.getElementById('detailGrid').innerHTML = `
+                <div class="detail-item"><div class="detail-label">Agent ID</div><div class="detail-value" style="font-size:14px">${agent.id}</div></div>
+                <div class="detail-item"><div class="detail-label">Status</div><div class="detail-value"><span class="status-badge ${agent.status}"><span class="dot"></span>${agent.status}</span></div></div>
+                <div class="detail-item"><div class="detail-label">Total Tasks</div><div class="detail-value">${agent.tasks.toLocaleString()}</div></div>
+                <div class="detail-item"><div class="detail-label">Gas Used</div><div class="detail-value">${agent.gas}</div></div>
+                <div class="detail-item"><div class="detail-label">CPU Usage</div><div class="detail-value">${agent.cpu}%</div></div>
+                <div class="detail-item"><div class="detail-label">Memory</div><div class="detail-value">${agent.memory}%</div></div>
+                <div class="detail-item"><div class="detail-label">Network</div><div class="detail-value" style="font-size:14px">${agent.network}</div></div>
+                <div class="detail-item"><div class="detail-label">Last Active</div><div class="detail-value" style="font-size:14px">${agent.lastActive}</div></div>
             `;
-            
             document.getElementById('agentModal').classList.add('active');
-            
-            // Draw detail chart
-            setTimeout(() => drawDetailChart(agent), 100);
+            setTimeout(() => {
+                const canvas = document.getElementById('detailChart');
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width = canvas.offsetWidth;
+                const h = canvas.height = 120;
+                const data = Array.from({length: 24}, () => Math.random() * agent.cpu + 10);
+                ctx.clearRect(0, 0, w, h);
+                const grad = ctx.createLinearGradient(0, 0, 0, h);
+                grad.addColorStop(0, agent.color + '40');
+                grad.addColorStop(1, agent.color + '00');
+                ctx.beginPath();
+                data.forEach((v, i) => { const x = (w / 23) * i; const y = h - (v / 100) * h; i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+                ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
+                ctx.beginPath();
+                data.forEach((v, i) => { const x = (w / 23) * i; const y = h - (v / 100) * h; i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+                ctx.strokeStyle = agent.color; ctx.lineWidth = 2; ctx.stroke();
+            }, 100);
         }
         
-        function drawDetailChart(agent) {
-            const canvas = document.getElementById('detailChart');
-            const ctx = canvas.getContext('2d');
-            const w = canvas.width = canvas.offsetWidth;
-            const h = canvas.height = 120;
-            
-            const data = Array.from({length: 24}, () => Math.random() * agent.cpu + 10);
-            
-            ctx.clearRect(0, 0, w, h);
-            
-            const gradient = ctx.createLinearGradient(0, 0, 0, h);
-            gradient.addColorStop(0, agent.color + '40');
-            gradient.addColorStop(1, agent.color + '00');
-            
-            ctx.beginPath();
-            data.forEach((val, i) => {
-                const x = (w / (data.length - 1)) * i;
-                const y = h - (val / 100) * h;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.lineTo(w, h);
-            ctx.lineTo(0, h);
-            ctx.closePath();
-            ctx.fillStyle = gradient;
-            ctx.fill();
-            
-            ctx.beginPath();
-            data.forEach((val, i) => {
-                const x = (w / (data.length - 1)) * i;
-                const y = h - (val / 100) * h;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.strokeStyle = agent.color;
-            ctx.lineWidth = 2;
-            ctx.stroke();
-        }
+        function closeModal() { document.getElementById('agentModal').classList.remove('active'); }
         
-        function closeModal() {
-            document.getElementById('agentModal').classList.remove('active');
-        }
-        
-        // ===== DEPLOY AGENT =====
+        // ===== DEPLOY =====
         function deployAgent() {
             const names = ['Phantom', 'Shadow', 'Nexus', 'Vortex', 'Cipher', 'Pulse', 'Flux', 'Echo'];
-            const name = names[Math.floor(Math.random() * names.length)] + '-' + 
-                         ['One', 'Two', 'Three', 'Four', 'Five'][Math.floor(Math.random() * 5)];
-            
+            const name = names[Math.floor(Math.random() * names.length)] + '-' + ['One', 'Two', 'Three', 'Four', 'Five'][Math.floor(Math.random() * 5)];
             agents.unshift({
-                name: name,
-                id: '0x' + Math.random().toString(16).substr(2, 4) + '...' + Math.random().toString(16).substr(2, 4),
-                status: 'active',
-                tasks: 0,
-                gas: '0.00 ETH',
-                lastActive: 'just now',
+                name, id: '0x' + Math.random().toString(16).substr(2, 4) + '...' + Math.random().toString(16).substr(2, 4),
+                status: 'active', tasks: 0, gas: '0.00 ETH', lastActive: 'just now',
                 avatar: ['🚀', '⚡', '🔮', '🎯'][Math.floor(Math.random() * 4)],
                 color: ['#3b82f6', '#8b5cf6', '#10b981', '#ec4899'][Math.floor(Math.random() * 4)],
-                cpu: Math.floor(Math.random() * 30) + 10,
-                memory: Math.floor(Math.random() * 40) + 20,
+                cpu: Math.floor(Math.random() * 30) + 10, memory: Math.floor(Math.random() * 40) + 20,
                 network: (Math.random() * 10 + 1).toFixed(1) + ' MB/s'
             });
-            
-            activities.unshift({
-                type: 'deploy', icon: '+',
-                text: `<strong>${name}</strong> deployed successfully`,
-                time: 'just now'
-            });
-            
-            renderAgents();
-            renderActivity();
-            drawPieChart();
+            activities.unshift({ type: 'deploy', icon: '+', text: `<strong>${name}</strong> deployed successfully`, time: 'just now' });
+            addNotification('success', '🚀', `<strong>${name}</strong> deployed successfully`);
+            renderAgents(); renderActivity(); drawPieChart();
             showToast('🚀 Agent deployed successfully!');
         }
         
         // ===== EXPORT =====
-        function toggleDropdown() {
-            document.getElementById('exportMenu').classList.toggle('show');
-        }
-        
+        function toggleDropdown() { document.getElementById('exportMenu').classList.toggle('show'); }
         function exportCSV() {
             let csv = 'Name,Status,Tasks,Gas Used,Last Active\n';
-            agents.forEach(a => {
-                csv += `${a.name},${a.status},${a.tasks},${a.gas},${a.lastActive}\n`;
-            });
+            agents.forEach(a => csv += `${a.name},${a.status},${a.tasks},${a.gas},${a.lastActive}\n`);
             downloadFile(csv, 'agents-export.csv', 'text/csv');
-            showToast('📄 CSV exported successfully!');
-            toggleDropdown();
+            showToast('📄 CSV exported!'); toggleDropdown();
         }
-        
         function exportJSON() {
-            const json = JSON.stringify(agents, null, 2);
-            downloadFile(json, 'agents-export.json', 'application/json');
-            showToast('📋 JSON exported successfully!');
-            toggleDropdown();
+            downloadFile(JSON.stringify(agents, null, 2), 'agents-export.json', 'application/json');
+            showToast('📋 JSON exported!'); toggleDropdown();
         }
-        
-        function exportPDF() {
-            showToast('📑 PDF export coming soon!');
-            toggleDropdown();
-        }
-        
         function downloadFile(content, filename, type) {
             const blob = new Blob([content], { type });
-            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url;
+            a.href = URL.createObjectURL(blob);
             a.download = filename;
             a.click();
-            URL.revokeObjectURL(url);
         }
         
         // ===== TOAST =====
         function showToast(message) {
-            const toast = document.getElementById('toast');
             document.getElementById('toastText').textContent = message;
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 3000);
+            document.getElementById('toast').classList.remove('hidden');
+            setTimeout(() => document.getElementById('toast').classList.add('hidden'), 3000);
         }
         
         // ===== LIVE UPDATES =====
-        function updateStats() {
+        setInterval(() => {
             const txEl = document.getElementById('transactions');
             let tx = parseInt(txEl.textContent.replace(',', ''));
             tx += Math.floor(Math.random() * 5);
             txEl.textContent = tx.toLocaleString();
-        }
-        
-        // ===== CLICK OUTSIDE =====
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.dropdown')) {
-                document.getElementById('exportMenu').classList.remove('show');
-            }
-        });
+        }, 3000);
         
         // ===== INIT =====
         renderAgents();
         renderActivity();
-        setTimeout(() => {
-            drawLineChart();
-            drawPieChart();
-        }, 100);
-        
-        setInterval(updateStats, 3000);
-        
-        window.addEventListener('resize', () => {
-            drawLineChart();
-            drawPieChart();
-        });
+        renderNotifications();
+        setTimeout(() => { drawLineChart(); drawPieChart(); }, 100);
+        window.addEventListener('resize', () => { drawLineChart(); drawPieChart(); });
     </script>
 </body>
 </html>
