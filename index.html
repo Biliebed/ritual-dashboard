@@ -7,11 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --bg-primary: #0a0a0f;
@@ -25,8 +21,6 @@
             --accent-green: #10b981;
             --accent-pink: #ec4899;
             --accent-orange: #f59e0b;
-            --glow-blue: rgba(59, 130, 246, 0.3);
-            --glow-purple: rgba(139, 92, 246, 0.3);
         }
         
         body {
@@ -40,10 +34,8 @@
         /* ===== GRID BACKGROUND ===== */
         .grid-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background-image: 
                 linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
@@ -52,7 +44,6 @@
             z-index: 0;
         }
         
-        /* ===== FLOATING ORBS ===== */
         .orb {
             position: fixed;
             border-radius: 50%;
@@ -60,37 +51,11 @@
             pointer-events: none;
             z-index: 0;
         }
+        .orb-1 { width: 400px; height: 400px; background: rgba(139,92,246,0.3); top: -100px; right: -100px; animation: float 20s ease-in-out infinite; }
+        .orb-2 { width: 300px; height: 300px; background: rgba(59,130,246,0.3); bottom: -50px; left: -50px; animation: float 15s ease-in-out infinite reverse; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, -30px); } }
         
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--glow-purple);
-            top: -100px;
-            right: -100px;
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--glow-blue);
-            bottom: -50px;
-            left: -50px;
-            animation: float 15s ease-in-out infinite reverse;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, -30px); }
-        }
-        
-        /* ===== LAYOUT ===== */
-        .app {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            min-height: 100vh;
-        }
+        .app { position: relative; z-index: 1; display: flex; min-height: 100vh; }
         
         /* ===== SIDEBAR ===== */
         .sidebar {
@@ -103,704 +68,310 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s ease;
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0 8px;
-            margin-bottom: 32px;
-        }
+        .logo { display: flex; align-items: center; gap: 12px; padding: 0 8px; margin-bottom: 32px; }
+        .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .logo-text { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
+        .logo-text span { color: var(--text-secondary); font-weight: 400; font-size: 12px; display: block; letter-spacing: 0; }
         
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-            border-radius: 10px;
-            display: flex;
+        .nav-section { margin-bottom: 24px; }
+        .nav-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; padding: 0 8px; margin-bottom: 8px; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 8px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; font-size: 14px; }
+        .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--text-primary); }
+        .nav-item.active { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
+        .nav-item .icon { width: 20px; text-align: center; }
+        .nav-item .badge { margin-left: auto; background: var(--accent-purple); color: white; font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+        
+        .sidebar-footer { margin-top: auto; padding: 16px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); }
+        .sidebar-footer p { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+        .sidebar-footer .status { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+        .status-dot { width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; animation: pulse 2s ease infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 200;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
         }
         
-        .logo-text {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        
-        .logo-text span {
-            color: var(--text-secondary);
-            font-weight: 400;
-            font-size: 12px;
-            display: block;
-            letter-spacing: 0;
-        }
-        
-        .nav-section {
-            margin-bottom: 24px;
-        }
-        
-        .nav-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 0 8px;
-            margin-bottom: 8px;
-        }
-        
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-        
-        .nav-item:hover {
-            background: rgba(255,255,255,0.05);
-            color: var(--text-primary);
-        }
-        
-        .nav-item.active {
-            background: rgba(139, 92, 246, 0.1);
-            color: var(--accent-purple);
-        }
-        
-        .nav-item .icon {
-            width: 20px;
-            text-align: center;
-        }
-        
-        .nav-item .badge {
-            margin-left: auto;
-            background: var(--accent-purple);
-            color: white;
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: 600;
-        }
-        
-        .sidebar-footer {
-            margin-top: auto;
-            padding: 16px;
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-        
-        .sidebar-footer p {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-        
-        .sidebar-footer .status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-        }
-        
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            animation: pulse 2s ease infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 90;
         }
         
         /* ===== MAIN CONTENT ===== */
-        .main {
-            flex: 1;
-            margin-left: 260px;
-            padding: 24px 32px;
-        }
+        .main { flex: 1; margin-left: 260px; padding: 24px 32px; }
         
-        /* ===== HEADER ===== */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-        }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+        .header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+        .header h1 span { color: var(--text-secondary); font-weight: 400; }
         
-        .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
+        .header-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
         
-        .header h1 span {
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
+        .search-box { display: flex; align-items: center; gap: 8px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 16px; width: 280px; transition: border-color 0.2s; }
+        .search-box:focus-within { border-color: var(--accent-purple); }
+        .search-box input { background: none; border: none; color: var(--text-primary); font-size: 14px; width: 100%; outline: none; }
+        .search-box input::placeholder { color: var(--text-secondary); }
+        .search-box kbd { background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 11px; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; }
         
-        .header-actions {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        
-        .search-box {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 8px 16px;
-            width: 280px;
-        }
-        
-        .search-box input {
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 14px;
-            width: 100%;
-            outline: none;
-        }
-        
-        .search-box input::placeholder {
-            color: var(--text-secondary);
-        }
-        
-        .search-box kbd {
-            background: var(--bg-secondary);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-        
-        .btn-ghost {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-        
-        .btn-ghost:hover {
-            background: rgba(255,255,255,0.05);
-        }
+        .btn { padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s; }
+        .btn-primary { background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); color: white; }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-ghost { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); }
+        .btn-ghost:hover { background: rgba(255,255,255,0.05); }
+        .btn-danger { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+        .btn-danger:hover { background: rgba(239,68,68,0.2); }
         
         /* ===== STATS GRID ===== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 32px;
-        }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
         
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        
-        .stat-card:hover {
-            border-color: rgba(139, 92, 246, 0.3);
-            transform: translateY(-2px);
-        }
-        
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-        }
-        
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s; }
+        .stat-card:hover { border-color: rgba(139, 92, 246, 0.3); transform: translateY(-2px); }
+        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
         .stat-card:nth-child(1)::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); }
         .stat-card:nth-child(2)::before { background: linear-gradient(90deg, var(--accent-green), var(--accent-blue)); }
         .stat-card:nth-child(3)::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
         .stat-card:nth-child(4)::before { background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink)); }
         
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        
-        .stat-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        
-        .stat-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-        
+        .stat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .stat-label { font-size: 13px; color: var(--text-secondary); }
+        .stat-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
         .stat-card:nth-child(1) .stat-icon { background: rgba(59, 130, 246, 0.1); }
         .stat-card:nth-child(2) .stat-icon { background: rgba(16, 185, 129, 0.1); }
         .stat-card:nth-child(3) .stat-icon { background: rgba(139, 92, 246, 0.1); }
         .stat-card:nth-child(4) .stat-icon { background: rgba(245, 158, 11, 0.1); }
-        
-        .stat-value {
-            font-size: 32px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            letter-spacing: -1px;
-        }
-        
-        .stat-change {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 8px;
-            font-size: 12px;
-        }
-        
+        .stat-value { font-size: 32px; font-weight: 700; font-family: 'JetBrains Mono', monospace; letter-spacing: -1px; }
+        .stat-change { display: flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 12px; }
         .stat-change.positive { color: var(--accent-green); }
-        .stat-change.negative { color: #ef4444; }
+        
+        /* ===== CHARTS GRID ===== */
+        .charts-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 32px; }
+        
+        .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .panel-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+        .panel-title { font-size: 16px; font-weight: 600; }
+        
+        .panel-tabs { display: flex; gap: 4px; }
+        .panel-tab { padding: 6px 12px; border-radius: 6px; font-size: 13px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+        .panel-tab:hover { color: var(--text-primary); }
+        .panel-tab.active { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
+        
+        .chart-container { padding: 20px; height: 250px; }
+        .chart-container canvas { width: 100% !important; height: 100% !important; }
         
         /* ===== CONTENT GRID ===== */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
+        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 32px; }
         
         /* ===== AGENTS TABLE ===== */
-        .panel {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-        }
+        .agents-table { width: 100%; }
+        .agents-table th { text-align: left; padding: 12px 20px; font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+        .agents-table td { padding: 14px 20px; font-size: 14px; border-bottom: 1px solid var(--border); }
+        .agents-table tr:last-child td { border-bottom: none; }
+        .agents-table tr:hover td { background: rgba(255,255,255,0.02); cursor: pointer; }
         
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
-        }
+        .agent-info { display: flex; align-items: center; gap: 12px; }
+        .agent-avatar { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .agent-name { font-weight: 500; }
+        .agent-id { font-size: 12px; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; }
         
-        .panel-title {
-            font-size: 16px;
-            font-weight: 600;
-        }
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .status-badge.active { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
+        .status-badge.idle { background: rgba(245, 158, 11, 0.1); color: var(--accent-orange); }
+        .status-badge.error { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        .status-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
         
-        .panel-tabs {
-            display: flex;
-            gap: 4px;
-        }
-        
-        .panel-tab {
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .panel-tab:hover {
-            color: var(--text-primary);
-        }
-        
-        .panel-tab.active {
-            background: rgba(139, 92, 246, 0.1);
-            color: var(--accent-purple);
-        }
-        
-        .agents-table {
-            width: 100%;
-        }
-        
-        .agents-table th {
-            text-align: left;
-            padding: 12px 20px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .agents-table td {
-            padding: 14px 20px;
-            font-size: 14px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .agents-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .agents-table tr:hover td {
-            background: rgba(255,255,255,0.02);
-        }
-        
-        .agent-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .agent-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-        
-        .agent-name {
-            font-weight: 500;
-        }
-        
-        .agent-id {
-            font-size: 12px;
-            color: var(--text-secondary);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .status-badge.active {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--accent-green);
-        }
-        
-        .status-badge.idle {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--accent-orange);
-        }
-        
-        .status-badge.error {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-        
-        .status-badge .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: currentColor;
-        }
-        
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-        }
+        .mono { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
         
         /* ===== ACTIVITY FEED ===== */
-        .activity-list {
-            padding: 16px 20px;
-        }
-        
-        .activity-item {
-            display: flex;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .activity-item:last-child {
-            border-bottom: none;
-        }
-        
-        .activity-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-        
+        .activity-list { padding: 16px 20px; max-height: 400px; overflow-y: auto; }
+        .activity-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
         .activity-icon.exec { background: rgba(59, 130, 246, 0.1); }
         .activity-icon.transfer { background: rgba(16, 185, 129, 0.1); }
         .activity-icon.deploy { background: rgba(139, 92, 246, 0.1); }
         .activity-icon.alert { background: rgba(245, 158, 11, 0.1); }
-        
-        .activity-content {
-            flex: 1;
-        }
-        
-        .activity-text {
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        
-        .activity-text strong {
-            color: var(--accent-purple);
-        }
-        
-        .activity-time {
-            font-size: 11px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-        
-        /* ===== VISUALIZATION PANEL ===== */
-        .viz-panel {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-        }
-        
-        .viz-canvas {
-            width: 100%;
-            height: 200px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            background: var(--bg-primary);
-        }
-        
-        #networkCanvas {
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* ===== NETWORK NODES ===== */
-        .node {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent-purple);
-            box-shadow: 0 0 20px var(--glow-purple);
-            animation: nodeGlow 2s ease infinite;
-        }
-        
-        @keyframes nodeGlow {
-            0%, 100% { box-shadow: 0 0 20px var(--glow-purple); }
-            50% { box-shadow: 0 0 40px var(--glow-purple); }
-        }
+        .activity-content { flex: 1; }
+        .activity-text { font-size: 13px; line-height: 1.5; }
+        .activity-text strong { color: var(--accent-purple); }
+        .activity-time { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
         
         /* ===== BOTTOM GRID ===== */
-        .bottom-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-        
-        .metric-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-        }
-        
-        .metric-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        
-        .metric-title {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-        
-        .metric-value {
-            font-size: 24px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            margin-bottom: 12px;
-        }
-        
-        .progress-bar {
-            height: 6px;
-            background: var(--bg-primary);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            border-radius: 3px;
-            transition: width 1s ease;
-        }
-        
+        .bottom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .metric-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .metric-title { font-size: 14px; color: var(--text-secondary); }
+        .metric-value { font-size: 24px; font-weight: 700; font-family: 'JetBrains Mono', monospace; margin-bottom: 12px; }
+        .progress-bar { height: 6px; background: var(--bg-primary); border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
         .progress-fill.blue { background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); }
         .progress-fill.green { background: linear-gradient(90deg, var(--accent-green), var(--accent-blue)); }
         .progress-fill.purple { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); }
         
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .modal-overlay.active { display: flex; }
+        
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .modal-header h2 { font-size: 20px; font-weight: 700; }
+        .modal-close { background: none; border: none; color: var(--text-secondary); font-size: 24px; cursor: pointer; padding: 4px 8px; border-radius: 6px; }
+        .modal-close:hover { background: rgba(255,255,255,0.05); }
+        
+        .modal-body { padding: 24px; }
+        
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+        .detail-item { background: var(--bg-secondary); padding: 16px; border-radius: 10px; }
+        .detail-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+        .detail-value { font-size: 18px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+        
+        .detail-chart { background: var(--bg-secondary); border-radius: 10px; padding: 16px; margin-top: 16px; }
+        .detail-chart h3 { font-size: 14px; margin-bottom: 12px; color: var(--text-secondary); }
+        
+        .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 12px; justify-content: flex-end; }
+        
+        /* ===== EXPORT DROPDOWN ===== */
+        .dropdown { position: relative; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; right: 0; margin-top: 8px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; min-width: 160px; z-index: 50; }
+        .dropdown-menu.show { display: block; }
+        .dropdown-item { padding: 10px 16px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .dropdown-item:hover { background: rgba(255,255,255,0.05); }
+        
+        /* ===== TOAST ===== */
+        .toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; display: flex; align-items: center; gap: 12px; z-index: 2000; animation: toastIn 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .toast.hidden { display: none; }
+        @keyframes toastIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .toast-icon { font-size: 20px; }
+        .toast-text { font-size: 14px; }
+        
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1200px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .charts-grid { grid-template-columns: 1fr; }
             .content-grid { grid-template-columns: 1fr; }
             .bottom-grid { grid-template-columns: 1fr; }
         }
         
         @media (max-width: 768px) {
-            .sidebar { display: none; }
-            .main { margin-left: 0; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .header { flex-direction: column; gap: 16px; align-items: flex-start; }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.active { display: block; }
+            .hamburger { display: flex; }
+            .main { margin-left: 0; padding: 80px 16px 16px; }
+            .header h1 { font-size: 22px; }
             .search-box { width: 100%; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .detail-grid { grid-template-columns: 1fr; }
+            .agents-table { font-size: 12px; }
+            .agents-table th, .agents-table td { padding: 10px 12px; }
         }
         
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 3px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255,255,255,0.1);
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     </style>
 </head>
 <body>
-    <!-- Background Effects -->
     <div class="grid-bg"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
+    
+    <!-- Hamburger Menu -->
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
     
     <div class="app">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <div class="logo-icon">◈</div>
-                <div class="logo-text">
-                    Ritual
-                    <span>Agent Dashboard</span>
-                </div>
+                <div class="logo-text">Ritual<span>Agent Dashboard</span></div>
             </div>
             
             <div class="nav-section">
                 <div class="nav-label">Overview</div>
-                <div class="nav-item active">
-                    <span class="icon">◉</span>
-                    Dashboard
-                </div>
-                <div class="nav-item">
-                    <span class="icon">◎</span>
-                    Network
-                </div>
-                <div class="nav-item">
-                    <span class="icon">◈</span>
-                    Agents
-                    <span class="badge">12</span>
-                </div>
+                <div class="nav-item active"><span class="icon">◉</span> Dashboard</div>
+                <div class="nav-item"><span class="icon">◎</span> Network</div>
+                <div class="nav-item"><span class="icon">◈</span> Agents <span class="badge" id="agentCount">12</span></div>
             </div>
             
             <div class="nav-section">
                 <div class="nav-label">Analytics</div>
-                <div class="nav-item">
-                    <span class="icon">▣</span>
-                    Transactions
-                </div>
-                <div class="nav-item">
-                    <span class="icon">◐</span>
-                    Performance
-                </div>
-                <div class="nav-item">
-                    <span class="icon">◇</span>
-                    Research
-                </div>
+                <div class="nav-item"><span class="icon">▣</span> Transactions</div>
+                <div class="nav-item"><span class="icon">◐</span> Performance</div>
+                <div class="nav-item"><span class="icon">◇</span> Research</div>
             </div>
             
             <div class="nav-section">
                 <div class="nav-label">System</div>
-                <div class="nav-item">
-                    <span class="icon">⚙</span>
-                    Settings
-                </div>
-                <div class="nav-item">
-                    <span class="icon">◈</span>
-                    Documentation
-                </div>
+                <div class="nav-item"><span class="icon">⚙</span> Settings</div>
+                <div class="nav-item"><span class="icon">◈</span> Documentation</div>
             </div>
             
             <div class="sidebar-footer">
                 <p>Network Status</p>
-                <div class="status">
-                    <div class="status-dot"></div>
-                    All Systems Operational
-                </div>
+                <div class="status"><div class="status-dot"></div> All Systems Operational</div>
             </div>
         </aside>
         
         <!-- Main Content -->
         <main class="main">
-            <!-- Header -->
             <div class="header">
                 <h1>Dashboard <span>/ Overview</span></h1>
                 <div class="header-actions">
                     <div class="search-box">
                         <span>🔍</span>
-                        <input type="text" placeholder="Search agents...">
+                        <input type="text" id="searchInput" placeholder="Search agents..." oninput="filterAgents()">
                         <kbd>⌘K</kbd>
                     </div>
-                    <button class="btn btn-ghost">Export</button>
+                    <div class="dropdown">
+                        <button class="btn btn-ghost" onclick="toggleDropdown()">📥 Export</button>
+                        <div class="dropdown-menu" id="exportMenu">
+                            <div class="dropdown-item" onclick="exportCSV()">📄 Export CSV</div>
+                            <div class="dropdown-item" onclick="exportJSON()">📋 Export JSON</div>
+                            <div class="dropdown-item" onclick="exportPDF()">📑 Export PDF</div>
+                        </div>
+                    </div>
                     <button class="btn btn-primary" onclick="deployAgent()">+ Deploy Agent</button>
                 </div>
             </div>
@@ -841,31 +412,40 @@
                 </div>
             </div>
             
-            <!-- Network Visualization -->
-            <div class="viz-panel">
-                <div class="panel-header">
-                    <div class="panel-title">Agent Network Visualization</div>
-                    <div style="display:flex;gap:12px;font-size:12px;color:var(--text-secondary)">
-                        <span>● <span style="color:var(--accent-green)">Active</span></span>
-                        <span>● <span style="color:var(--accent-orange)">Idle</span></span>
-                        <span>● <span style="color:var(--accent-purple)">Processing</span></span>
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title">Transaction History</div>
+                        <div class="panel-tabs">
+                            <div class="panel-tab active" onclick="setChartPeriod('24h', this)">24h</div>
+                            <div class="panel-tab" onclick="setChartPeriod('7d', this)">7d</div>
+                            <div class="panel-tab" onclick="setChartPeriod('30d', this)">30d</div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="lineChart"></canvas>
                     </div>
                 </div>
-                <div class="viz-canvas">
-                    <canvas id="networkCanvas"></canvas>
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title">Agent Status</div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="pieChart"></canvas>
+                    </div>
                 </div>
             </div>
             
             <!-- Content Grid -->
             <div class="content-grid">
-                <!-- Agents Table -->
                 <div class="panel">
                     <div class="panel-header">
                         <div class="panel-title">Active Agents</div>
                         <div class="panel-tabs">
-                            <div class="panel-tab active">All</div>
-                            <div class="panel-tab">Running</div>
-                            <div class="panel-tab">Idle</div>
+                            <div class="panel-tab active" onclick="filterByStatus('all', this)">All</div>
+                            <div class="panel-tab" onclick="filterByStatus('active', this)">Running</div>
+                            <div class="panel-tab" onclick="filterByStatus('idle', this)">Idle</div>
                         </div>
                     </div>
                     <table class="agents-table">
@@ -878,69 +458,78 @@
                                 <th>Last Active</th>
                             </tr>
                         </thead>
-                        <tbody id="agentsTable">
-                            <!-- Filled by JS -->
-                        </tbody>
+                        <tbody id="agentsTable"></tbody>
                     </table>
                 </div>
                 
-                <!-- Activity Feed -->
                 <div class="panel">
                     <div class="panel-header">
                         <div class="panel-title">Live Activity</div>
                     </div>
-                    <div class="activity-list" id="activityFeed">
-                        <!-- Filled by JS -->
-                    </div>
+                    <div class="activity-list" id="activityFeed"></div>
                 </div>
             </div>
             
             <!-- Bottom Metrics -->
             <div class="bottom-grid">
                 <div class="metric-card">
-                    <div class="metric-header">
-                        <span class="metric-title">AI Inference Load</span>
-                    </div>
+                    <div class="metric-header"><span class="metric-title">AI Inference Load</span></div>
                     <div class="metric-value">78%</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill blue" style="width: 78%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill blue" style="width: 78%"></div></div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-header">
-                        <span class="metric-title">Network Throughput</span>
-                    </div>
+                    <div class="metric-header"><span class="metric-title">Network Throughput</span></div>
                     <div class="metric-value">1.2k/s</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill green" style="width: 65%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill green" style="width: 65%"></div></div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-header">
-                        <span class="metric-title">Memory Usage</span>
-                    </div>
+                    <div class="metric-header"><span class="metric-title">Memory Usage</span></div>
                     <div class="metric-value">42%</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill purple" style="width: 42%"></div>
-                    </div>
+                    <div class="progress-bar"><div class="progress-fill purple" style="width: 42%"></div></div>
                 </div>
             </div>
         </main>
     </div>
+    
+    <!-- Agent Detail Modal -->
+    <div class="modal-overlay" id="agentModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalAgentName">Agent Details</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-grid" id="detailGrid"></div>
+                <div class="detail-chart">
+                    <h3>Performance (Last 24h)</h3>
+                    <canvas id="detailChart" height="120"></canvas>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" onclick="closeModal()">Terminate</button>
+                <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast -->
+    <div class="toast hidden" id="toast">
+        <span class="toast-icon">✅</span>
+        <span class="toast-text" id="toastText">Action completed</span>
+    </div>
 
     <script>
-        // ===== AGENT DATA =====
-        const agents = [
-            { name: 'Sentinel-Alpha', id: '0x7a3f...8e2d', status: 'active', tasks: 1247, gas: '0.42 ETH', lastActive: '2m ago', avatar: '🤖', color: '#3b82f6' },
-            { name: 'Oracle-Prime', id: '0x9b2c...4f1a', status: 'active', tasks: 892, gas: '0.31 ETH', lastActive: '5m ago', avatar: '🔮', color: '#8b5cf6' },
-            { name: 'Guardian-Net', id: '0x3d8e...7c5b', status: 'idle', tasks: 456, gas: '0.18 ETH', lastActive: '1h ago', avatar: '🛡️', color: '#10b981' },
-            { name: 'Trader-Bot-X', id: '0x1f4a...9d3e', status: 'active', tasks: 2103, gas: '1.24 ETH', lastActive: '1m ago', avatar: '📊', color: '#f59e0b' },
-            { name: 'Data-Walker', id: '0x8c7b...2a6f', status: 'active', tasks: 678, gas: '0.29 ETH', lastActive: '8m ago', avatar: '🌐', color: '#ec4899' },
-            { name: 'Node-Keeper', id: '0x5e9d...1b4c', status: 'error', tasks: 234, gas: '0.12 ETH', lastActive: '2h ago', avatar: '⚠️', color: '#ef4444' },
+        // ===== DATA =====
+        let agents = [
+            { name: 'Sentinel-Alpha', id: '0x7a3f...8e2d', status: 'active', tasks: 1247, gas: '0.42 ETH', lastActive: '2m ago', avatar: '🤖', color: '#3b82f6', cpu: 45, memory: 62, network: '12.5 MB/s' },
+            { name: 'Oracle-Prime', id: '0x9b2c...4f1a', status: 'active', tasks: 892, gas: '0.31 ETH', lastActive: '5m ago', avatar: '🔮', color: '#8b5cf6', cpu: 38, memory: 55, network: '8.2 MB/s' },
+            { name: 'Guardian-Net', id: '0x3d8e...7c5b', status: 'idle', tasks: 456, gas: '0.18 ETH', lastActive: '1h ago', avatar: '🛡️', color: '#10b981', cpu: 12, memory: 28, network: '2.1 MB/s' },
+            { name: 'Trader-Bot-X', id: '0x1f4a...9d3e', status: 'active', tasks: 2103, gas: '1.24 ETH', lastActive: '1m ago', avatar: '📊', color: '#f59e0b', cpu: 72, memory: 81, network: '24.8 MB/s' },
+            { name: 'Data-Walker', id: '0x8c7b...2a6f', status: 'active', tasks: 678, gas: '0.29 ETH', lastActive: '8m ago', avatar: '🌐', color: '#ec4899', cpu: 56, memory: 44, network: '15.3 MB/s' },
+            { name: 'Node-Keeper', id: '0x5e9d...1b4c', status: 'error', tasks: 234, gas: '0.12 ETH', lastActive: '2h ago', avatar: '⚠️', color: '#ef4444', cpu: 0, memory: 15, network: '0 MB/s' },
         ];
         
-        // ===== ACTIVITY DATA =====
-        const activities = [
+        let activities = [
             { type: 'exec', icon: '▶', text: '<strong>Sentinel-Alpha</strong> executed inference task #8472', time: '2 minutes ago' },
             { type: 'transfer', icon: '↗', text: '<strong>Trader-Bot-X</strong> transferred 0.5 ETH to vault', time: '5 minutes ago' },
             { type: 'deploy', icon: '+', text: '<strong>Oracle-Prime</strong> deployed new model checkpoint', time: '12 minutes ago' },
@@ -949,11 +538,34 @@
             { type: 'transfer', icon: '↗', text: '<strong>Guardian-Net</strong> received 1.2 ETH reward', time: '32 minutes ago' },
         ];
         
-        // ===== RENDER AGENTS TABLE =====
+        let currentFilter = 'all';
+        let searchQuery = '';
+        
+        // ===== SIDEBAR TOGGLE =====
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        }
+        
+        // ===== RENDER AGENTS =====
         function renderAgents() {
+            let filtered = agents;
+            
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(a => a.status === currentFilter);
+            }
+            
+            if (searchQuery) {
+                const q = searchQuery.toLowerCase();
+                filtered = filtered.filter(a => 
+                    a.name.toLowerCase().includes(q) || 
+                    a.id.toLowerCase().includes(q)
+                );
+            }
+            
             const tbody = document.getElementById('agentsTable');
-            tbody.innerHTML = agents.map(agent => `
-                <tr>
+            tbody.innerHTML = filtered.map((agent, idx) => `
+                <tr onclick="openAgentDetail(${agents.indexOf(agent)})">
                     <td>
                         <div class="agent-info">
                             <div class="agent-avatar" style="background: ${agent.color}20">${agent.avatar}</div>
@@ -974,9 +586,25 @@
                     <td style="color: var(--text-secondary)">${agent.lastActive}</td>
                 </tr>
             `).join('');
+            
+            document.getElementById('agentCount').textContent = agents.length;
+            document.getElementById('activeAgents').textContent = agents.filter(a => a.status === 'active').length;
         }
         
-        // ===== RENDER ACTIVITY FEED =====
+        // ===== FILTER =====
+        function filterByStatus(status, el) {
+            currentFilter = status;
+            document.querySelectorAll('.content-grid .panel-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            renderAgents();
+        }
+        
+        function filterAgents() {
+            searchQuery = document.getElementById('searchInput').value;
+            renderAgents();
+        }
+        
+        // ===== RENDER ACTIVITY =====
         function renderActivity() {
             const feed = document.getElementById('activityFeed');
             feed.innerHTML = activities.map(act => `
@@ -990,87 +618,268 @@
             `).join('');
         }
         
-        // ===== NETWORK VISUALIZATION =====
-        const canvas = document.getElementById('networkCanvas');
-        const ctx = canvas.getContext('2d');
-        let nodes = [];
-        let connections = [];
-        
-        function initNetwork() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+        // ===== CHARTS =====
+        function drawLineChart() {
+            const canvas = document.getElementById('lineChart');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = canvas.offsetWidth;
+            const h = canvas.height = canvas.offsetHeight;
             
-            // Create nodes
-            for (let i = 0; i < 20; i++) {
-                nodes.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    radius: Math.random() * 3 + 2,
-                    color: ['#3b82f6', '#8b5cf6', '#10b981', '#ec4899'][Math.floor(Math.random() * 4)],
-                    pulse: Math.random() * Math.PI * 2
-                });
-            }
-        }
-        
-        function drawNetwork() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const data = [45, 52, 38, 65, 78, 62, 85, 92, 78, 95, 88, 102];
+            const labels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
             
-            // Draw connections
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[j].x - nodes[i].x;
-                    const dy = nodes[j].y - nodes[i].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (dist < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.2 * (1 - dist / 150)})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
+            const padding = { top: 20, right: 20, bottom: 30, left: 40 };
+            const chartW = w - padding.left - padding.right;
+            const chartH = h - padding.top - padding.bottom;
+            const max = Math.max(...data) * 1.1;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            // Grid
+            ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = padding.top + (chartH / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding.left, y);
+                ctx.lineTo(w - padding.right, y);
+                ctx.stroke();
             }
             
-            // Draw nodes
-            nodes.forEach(node => {
-                node.pulse += 0.02;
-                const pulseRadius = node.radius + Math.sin(node.pulse) * 0.5;
-                
-                // Glow
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, pulseRadius * 3, 0, Math.PI * 2);
-                ctx.fillStyle = node.color + '20';
-                ctx.fill();
-                
-                // Node
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, pulseRadius, 0, Math.PI * 2);
-                ctx.fillStyle = node.color;
-                ctx.fill();
-                
-                // Update position
-                node.x += node.vx;
-                node.y += node.vy;
-                
-                // Bounce off walls
-                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
-                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+            // Line
+            const gradient = ctx.createLinearGradient(0, padding.top, 0, h - padding.bottom);
+            gradient.addColorStop(0, 'rgba(139, 92, 246, 0.3)');
+            gradient.addColorStop(1, 'rgba(139, 92, 246, 0)');
+            
+            ctx.beginPath();
+            data.forEach((val, i) => {
+                const x = padding.left + (chartW / (data.length - 1)) * i;
+                const y = padding.top + chartH - (val / max) * chartH;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
             });
             
-            requestAnimationFrame(drawNetwork);
+            // Fill
+            ctx.lineTo(padding.left + chartW, padding.top + chartH);
+            ctx.lineTo(padding.left, padding.top + chartH);
+            ctx.closePath();
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            
+            // Line stroke
+            ctx.beginPath();
+            data.forEach((val, i) => {
+                const x = padding.left + (chartW / (data.length - 1)) * i;
+                const y = padding.top + chartH - (val / max) * chartH;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.strokeStyle = '#8b5cf6';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Points
+            data.forEach((val, i) => {
+                const x = padding.left + (chartW / (data.length - 1)) * i;
+                const y = padding.top + chartH - (val / max) * chartH;
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fillStyle = '#8b5cf6';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x, y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = '#fff';
+                ctx.fill();
+            });
+            
+            // Labels
+            ctx.fillStyle = 'rgba(255,255,255,0.4)';
+            ctx.font = '10px Inter';
+            ctx.textAlign = 'center';
+            labels.forEach((label, i) => {
+                const x = padding.left + (chartW / (data.length - 1)) * i;
+                ctx.fillText(label, x, h - 8);
+            });
         }
         
-        // ===== DEPLOY AGENT ANIMATION =====
+        function drawPieChart() {
+            const canvas = document.getElementById('pieChart');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = canvas.offsetWidth;
+            const h = canvas.height = canvas.offsetHeight;
+            const centerX = w / 2;
+            const centerY = h / 2;
+            const radius = Math.min(w, h) / 2 - 30;
+            
+            const activeCount = agents.filter(a => a.status === 'active').length;
+            const idleCount = agents.filter(a => a.status === 'idle').length;
+            const errorCount = agents.filter(a => a.status === 'error').length;
+            const total = agents.length;
+            
+            const slices = [
+                { value: activeCount, color: '#10b981', label: 'Active' },
+                { value: idleCount, color: '#f59e0b', label: 'Idle' },
+                { value: errorCount, color: '#ef4444', label: 'Error' },
+            ];
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            let startAngle = -Math.PI / 2;
+            slices.forEach(slice => {
+                const sliceAngle = (slice.value / total) * 2 * Math.PI;
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                ctx.closePath();
+                ctx.fillStyle = slice.color;
+                ctx.fill();
+                
+                // Label
+                const midAngle = startAngle + sliceAngle / 2;
+                const labelX = centerX + Math.cos(midAngle) * (radius * 0.65);
+                const labelY = centerY + Math.sin(midAngle) * (radius * 0.65);
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 14px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(slice.value, labelX, labelY);
+                
+                startAngle += sliceAngle;
+            });
+            
+            // Center hole
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius * 0.5, 0, Math.PI * 2);
+            ctx.fillStyle = '#16161f';
+            ctx.fill();
+            
+            // Center text
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 24px JetBrains Mono';
+            ctx.textAlign = 'center';
+            ctx.fillText(total, centerX, centerY + 5);
+            ctx.font = '12px Inter';
+            ctx.fillStyle = 'rgba(255,255,255,0.5)';
+            ctx.fillText('Total', centerX, centerY + 22);
+            
+            // Legend
+            const legendY = h - 20;
+            const legendX = w / 2 - 80;
+            slices.forEach((slice, i) => {
+                ctx.fillStyle = slice.color;
+                ctx.beginPath();
+                ctx.arc(legendX + i * 60, legendY, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.font = '10px Inter';
+                ctx.textAlign = 'left';
+                ctx.fillText(slice.label, legendX + i * 60 + 10, legendY + 4);
+            });
+        }
+        
+        function setChartPeriod(period, el) {
+            document.querySelectorAll('.charts-grid .panel-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            drawLineChart();
+        }
+        
+        // ===== AGENT DETAIL MODAL =====
+        function openAgentDetail(idx) {
+            const agent = agents[idx];
+            document.getElementById('modalAgentName').textContent = agent.avatar + ' ' + agent.name;
+            
+            const grid = document.getElementById('detailGrid');
+            grid.innerHTML = `
+                <div class="detail-item">
+                    <div class="detail-label">Agent ID</div>
+                    <div class="detail-value" style="font-size:14px">${agent.id}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Status</div>
+                    <div class="detail-value"><span class="status-badge ${agent.status}"><span class="dot"></span>${agent.status}</span></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Tasks</div>
+                    <div class="detail-value">${agent.tasks.toLocaleString()}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Gas Used</div>
+                    <div class="detail-value">${agent.gas}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">CPU Usage</div>
+                    <div class="detail-value">${agent.cpu}%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Memory</div>
+                    <div class="detail-value">${agent.memory}%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Network</div>
+                    <div class="detail-value" style="font-size:14px">${agent.network}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Last Active</div>
+                    <div class="detail-value" style="font-size:14px">${agent.lastActive}</div>
+                </div>
+            `;
+            
+            document.getElementById('agentModal').classList.add('active');
+            
+            // Draw detail chart
+            setTimeout(() => drawDetailChart(agent), 100);
+        }
+        
+        function drawDetailChart(agent) {
+            const canvas = document.getElementById('detailChart');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = canvas.offsetWidth;
+            const h = canvas.height = 120;
+            
+            const data = Array.from({length: 24}, () => Math.random() * agent.cpu + 10);
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            const gradient = ctx.createLinearGradient(0, 0, 0, h);
+            gradient.addColorStop(0, agent.color + '40');
+            gradient.addColorStop(1, agent.color + '00');
+            
+            ctx.beginPath();
+            data.forEach((val, i) => {
+                const x = (w / (data.length - 1)) * i;
+                const y = h - (val / 100) * h;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.lineTo(w, h);
+            ctx.lineTo(0, h);
+            ctx.closePath();
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            
+            ctx.beginPath();
+            data.forEach((val, i) => {
+                const x = (w / (data.length - 1)) * i;
+                const y = h - (val / 100) * h;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.strokeStyle = agent.color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+        
+        function closeModal() {
+            document.getElementById('agentModal').classList.remove('active');
+        }
+        
+        // ===== DEPLOY AGENT =====
         function deployAgent() {
             const names = ['Phantom', 'Shadow', 'Nexus', 'Vortex', 'Cipher', 'Pulse', 'Flux', 'Echo'];
             const name = names[Math.floor(Math.random() * names.length)] + '-' + 
                          ['One', 'Two', 'Three', 'Four', 'Five'][Math.floor(Math.random() * 5)];
             
-            const newAgent = {
+            agents.unshift({
                 name: name,
                 id: '0x' + Math.random().toString(16).substr(2, 4) + '...' + Math.random().toString(16).substr(2, 4),
                 status: 'active',
@@ -1078,47 +887,97 @@
                 gas: '0.00 ETH',
                 lastActive: 'just now',
                 avatar: ['🚀', '⚡', '🔮', '🎯'][Math.floor(Math.random() * 4)],
-                color: ['#3b82f6', '#8b5cf6', '#10b981', '#ec4899'][Math.floor(Math.random() * 4)]
-            };
+                color: ['#3b82f6', '#8b5cf6', '#10b981', '#ec4899'][Math.floor(Math.random() * 4)],
+                cpu: Math.floor(Math.random() * 30) + 10,
+                memory: Math.floor(Math.random() * 40) + 20,
+                network: (Math.random() * 10 + 1).toFixed(1) + ' MB/s'
+            });
             
-            agents.unshift(newAgent);
-            renderAgents();
-            
-            // Update count
-            document.getElementById('activeAgents').textContent = agents.length;
-            
-            // Add activity
             activities.unshift({
-                type: 'deploy',
-                icon: '+',
+                type: 'deploy', icon: '+',
                 text: `<strong>${name}</strong> deployed successfully`,
                 time: 'just now'
             });
+            
+            renderAgents();
             renderActivity();
+            drawPieChart();
+            showToast('🚀 Agent deployed successfully!');
         }
         
-        // ===== LIVE DATA UPDATES =====
+        // ===== EXPORT =====
+        function toggleDropdown() {
+            document.getElementById('exportMenu').classList.toggle('show');
+        }
+        
+        function exportCSV() {
+            let csv = 'Name,Status,Tasks,Gas Used,Last Active\n';
+            agents.forEach(a => {
+                csv += `${a.name},${a.status},${a.tasks},${a.gas},${a.lastActive}\n`;
+            });
+            downloadFile(csv, 'agents-export.csv', 'text/csv');
+            showToast('📄 CSV exported successfully!');
+            toggleDropdown();
+        }
+        
+        function exportJSON() {
+            const json = JSON.stringify(agents, null, 2);
+            downloadFile(json, 'agents-export.json', 'application/json');
+            showToast('📋 JSON exported successfully!');
+            toggleDropdown();
+        }
+        
+        function exportPDF() {
+            showToast('📑 PDF export coming soon!');
+            toggleDropdown();
+        }
+        
+        function downloadFile(content, filename, type) {
+            const blob = new Blob([content], { type });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // ===== TOAST =====
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastText').textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+        
+        // ===== LIVE UPDATES =====
         function updateStats() {
-            // Random transaction count increase
             const txEl = document.getElementById('transactions');
             let tx = parseInt(txEl.textContent.replace(',', ''));
             tx += Math.floor(Math.random() * 5);
             txEl.textContent = tx.toLocaleString();
         }
         
+        // ===== CLICK OUTSIDE =====
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                document.getElementById('exportMenu').classList.remove('show');
+            }
+        });
+        
         // ===== INIT =====
         renderAgents();
         renderActivity();
-        initNetwork();
-        drawNetwork();
+        setTimeout(() => {
+            drawLineChart();
+            drawPieChart();
+        }, 100);
         
-        // Update stats every 3 seconds
         setInterval(updateStats, 3000);
         
-        // Handle resize
         window.addEventListener('resize', () => {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+            drawLineChart();
+            drawPieChart();
         });
     </script>
 </body>
