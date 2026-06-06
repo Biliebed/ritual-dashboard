@@ -813,6 +813,267 @@
         [data-theme="light"] .wallet-address { background: #f3f4f6; }
         [data-theme="light"] .wallet-stat { background: #f8f9fa; }
         
+        /* ===== ADVANCED ANALYTICS ===== */
+        .analytics-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        
+        .analytics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .analytics-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .analytics-icon { font-size: 20px; }
+        
+        .analytics-tabs {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .analytics-tab {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .analytics-tab:hover {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .analytics-tab.active {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent-purple);
+            border-color: var(--accent-purple);
+        }
+        
+        .analytics-content {
+            padding: 20px;
+        }
+        
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .analytics-chart-card {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 16px;
+        }
+        
+        .analytics-chart-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .analytics-chart-card canvas {
+            width: 100% !important;
+        }
+        
+        .analytics-stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        
+        .analytics-stat {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+        
+        .analytics-stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .analytics-stat-icon.blue { background: rgba(59, 130, 246, 0.1); }
+        .analytics-stat-icon.green { background: rgba(16, 185, 129, 0.1); }
+        .analytics-stat-icon.purple { background: rgba(139, 92, 246, 0.1); }
+        .analytics-stat-icon.orange { background: rgba(245, 158, 11, 0.1); }
+        
+        .analytics-stat-info { flex: 1; }
+        
+        .analytics-stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .analytics-stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .analytics-stat-change {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        .analytics-stat-change.positive {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+        }
+        
+        .analytics-stat-change.negative {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        /* Comparison */
+        .comparison-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-header h4 {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .comparison-select {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .comparison-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .comparison-checkbox:hover {
+            border-color: var(--accent-purple);
+        }
+        
+        .comparison-checkbox input {
+            accent-color: var(--accent-purple);
+        }
+        
+        .comparison-chart-container {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-chart-container canvas {
+            width: 100% !important;
+        }
+        
+        .comparison-table {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+        }
+        
+        .comparison-table th {
+            background: var(--bg-primary);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        /* Insights */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .insight-card {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-purple);
+        }
+        
+        .insight-card.warning { border-left-color: var(--accent-orange); }
+        .insight-card.success { border-left-color: var(--accent-green); }
+        .insight-card.info { border-left-color: var(--accent-blue); }
+        
+        .insight-icon {
+            font-size: 24px;
+        }
+        
+        .insight-content h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .insight-content p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        [data-theme="light"] .analytics-chart-card { background: #f8f9fa; }
+        [data-theme="light"] .analytics-stat { background: #f8f9fa; }
+        [data-theme="light"] .comparison-checkbox { background: #ffffff; }
+        [data-theme="light"] .comparison-chart-container { background: #f8f9fa; }
+        [data-theme="light"] .comparison-table { background: #ffffff; }
+        [data-theme="light"] .comparison-table th { background: #f8f9fa; }
+        [data-theme="light"] .insight-card { background: #f8f9fa; }
+        [data-theme="light"] .analytics-tab { background: #ffffff; border-color: #e5e7eb; }
+        
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0,0,0,0.7);
@@ -1088,6 +1349,115 @@
                     <div class="metric-title">Memory Usage</div>
                     <div class="metric-value">42%</div>
                     <div class="progress-bar"><div class="progress-fill purple" style="width: 42%"></div></div>
+                </div>
+            </div>
+            
+            <!-- ADVANCED ANALYTICS -->
+            <div class="analytics-panel">
+                <div class="analytics-header">
+                    <div class="analytics-title">
+                        <span class="analytics-icon">📊</span>
+                        <span>Advanced Analytics</span>
+                    </div>
+                    <div class="analytics-tabs">
+                        <button class="analytics-tab active" onclick="switchAnalyticsTab('performance', this)">Performance</button>
+                        <button class="analytics-tab" onclick="switchAnalyticsTab('comparison', this)">Comparison</button>
+                        <button class="analytics-tab" onclick="switchAnalyticsTab('insights', this)">Insights</button>
+                    </div>
+                </div>
+                
+                <!-- Performance Tab -->
+                <div class="analytics-content" id="performanceTab">
+                    <div class="analytics-grid">
+                        <div class="analytics-chart-card">
+                            <h4>Tasks Completed (24h)</h4>
+                            <canvas id="tasksBarChart" height="200"></canvas>
+                        </div>
+                        <div class="analytics-chart-card">
+                            <h4>Gas Usage Trend</h4>
+                            <canvas id="gasAreaChart" height="200"></canvas>
+                        </div>
+                    </div>
+                    <div class="analytics-stats-row">
+                        <div class="analytics-stat">
+                            <div class="analytics-stat-icon blue">📈</div>
+                            <div class="analytics-stat-info">
+                                <div class="analytics-stat-value">5,610</div>
+                                <div class="analytics-stat-label">Total Tasks (24h)</div>
+                            </div>
+                            <div class="analytics-stat-change positive">+12.5%</div>
+                        </div>
+                        <div class="analytics-stat">
+                            <div class="analytics-stat-icon green">⚡</div>
+                            <div class="analytics-stat-info">
+                                <div class="analytics-stat-value">2.4s</div>
+                                <div class="analytics-stat-label">Avg Response Time</div>
+                            </div>
+                            <div class="analytics-stat-change positive">-0.3s</div>
+                        </div>
+                        <div class="analytics-stat">
+                            <div class="analytics-stat-icon purple">💰</div>
+                            <div class="analytics-stat-info">
+                                <div class="analytics-stat-value">2.84 ETH</div>
+                                <div class="analytics-stat-label">Total Gas Used</div>
+                            </div>
+                            <div class="analytics-stat-change negative">+0.2 ETH</div>
+                        </div>
+                        <div class="analytics-stat">
+                            <div class="analytics-stat-icon orange">✅</div>
+                            <div class="analytics-stat-info">
+                                <div class="analytics-stat-value">98.7%</div>
+                                <div class="analytics-stat-label">Success Rate</div>
+                            </div>
+                            <div class="analytics-stat-change positive">+0.5%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comparison Tab -->
+                <div class="analytics-content" id="comparisonTab" style="display: none;">
+                    <div class="comparison-header">
+                        <h4>Select agents to compare:</h4>
+                        <div class="comparison-select" id="comparisonSelect"></div>
+                    </div>
+                    <div class="comparison-chart-container">
+                        <canvas id="comparisonChart" height="250"></canvas>
+                    </div>
+                    <div class="comparison-table" id="comparisonTable"></div>
+                </div>
+                
+                <!-- Insights Tab -->
+                <div class="analytics-content" id="insightsTab" style="display: none;">
+                    <div class="insights-grid">
+                        <div class="insight-card">
+                            <div class="insight-icon">🎯</div>
+                            <div class="insight-content">
+                                <h4>Top Performer</h4>
+                                <p><strong>Trader-Bot-X</strong> completed 2,103 tasks with 99.2% success rate</p>
+                            </div>
+                        </div>
+                        <div class="insight-card warning">
+                            <div class="insight-icon">⚠️</div>
+                            <div class="insight-content">
+                                <h4>Needs Attention</h4>
+                                <p><strong>Node-Keeper</strong> has 3 consecutive errors. Consider restarting.</p>
+                            </div>
+                        </div>
+                        <div class="insight-card success">
+                            <div class="insight-icon">💡</div>
+                            <div class="insight-content">
+                                <h4>Optimization Tip</h4>
+                                <p>Deploy agents during low gas hours (2-6 AM UTC) to save up to 40% on gas.</p>
+                            </div>
+                        </div>
+                        <div class="insight-card info">
+                            <div class="insight-icon">📊</div>
+                            <div class="insight-content">
+                                <h4>Network Health</h4>
+                                <p>All systems operational. Network latency: <strong>45ms</strong> (excellent).</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -1971,8 +2341,249 @@
         renderActivity();
         renderNotifications();
         renderLogs();
-        setTimeout(() => { drawLineChart(); drawPieChart(); drawGasChart(); updateGasPrices(); }, 100);
+        setTimeout(() => { drawLineChart(); drawPieChart(); drawGasChart(); updateGasPrices(); drawAnalyticsCharts(); initComparison(); }, 100);
         window.addEventListener('resize', () => { drawLineChart(); drawPieChart(); drawGasChart(); });
+        
+        // ===== ADVANCED ANALYTICS =====
+        function switchAnalyticsTab(tab, el) {
+            // Hide all tabs
+            document.getElementById('performanceTab').style.display = 'none';
+            document.getElementById('comparisonTab').style.display = 'none';
+            document.getElementById('insightsTab').style.display = 'none';
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.analytics-tab').forEach(t => t.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tab + 'Tab').style.display = 'block';
+            el.classList.add('active');
+            
+            // Draw charts if needed
+            if (tab === 'performance') {
+                setTimeout(drawAnalyticsCharts, 100);
+            } else if (tab === 'comparison') {
+                setTimeout(drawComparisonChart, 100);
+            }
+        }
+        
+        function drawAnalyticsCharts() {
+            // Tasks Bar Chart
+            const tasksCanvas = document.getElementById('tasksBarChart');
+            if (!tasksCanvas) return;
+            const tCtx = tasksCanvas.getContext('2d');
+            const tW = tasksCanvas.width = tasksCanvas.offsetWidth;
+            const tH = tasksCanvas.height = 200;
+            
+            const taskData = agents.map(a => ({ name: a.name.split('-')[0], tasks: a.tasks }));
+            const maxTasks = Math.max(...taskData.map(d => d.tasks));
+            
+            tCtx.clearRect(0, 0, tW, tH);
+            
+            const barWidth = (tW - 60) / taskData.length;
+            const colors = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899', '#ef4444'];
+            
+            taskData.forEach((d, i) => {
+                const barHeight = (d.tasks / maxTasks) * (tH - 40);
+                const x = 40 + i * barWidth + barWidth * 0.2;
+                const y = tH - 20 - barHeight;
+                
+                // Bar
+                const grad = tCtx.createLinearGradient(x, y, x, tH - 20);
+                grad.addColorStop(0, colors[i % colors.length]);
+                grad.addColorStop(1, colors[i % colors.length] + '60');
+                tCtx.fillStyle = grad;
+                tCtx.beginPath();
+                tCtx.roundRect(x, y, barWidth * 0.6, barHeight, 4);
+                tCtx.fill();
+                
+                // Label
+                tCtx.fillStyle = 'rgba(255,255,255,0.6)';
+                tCtx.font = '10px Inter';
+                tCtx.textAlign = 'center';
+                tCtx.fillText(d.name, x + barWidth * 0.3, tH - 5);
+                
+                // Value
+                tCtx.fillStyle = '#fff';
+                tCtx.font = '11px JetBrains Mono';
+                tCtx.fillText(d.tasks, x + barWidth * 0.3, y - 5);
+            });
+            
+            // Gas Area Chart
+            const gasCanvas = document.getElementById('gasAreaChart');
+            if (!gasCanvas) return;
+            const gCtx = gasCanvas.getContext('2d');
+            const gW = gasCanvas.width = gasCanvas.offsetWidth;
+            const gH = gasCanvas.height = 200;
+            
+            const gasHistory = Array.from({length: 12}, () => Math.floor(Math.random() * 30) + 15);
+            const maxGas = Math.max(...gasHistory) * 1.2;
+            
+            gCtx.clearRect(0, 0, gW, gH);
+            
+            // Grid
+            gCtx.strokeStyle = 'rgba(255,255,255,0.05)';
+            for (let i = 0; i <= 4; i++) {
+                const y = 20 + ((gH - 40) / 4) * i;
+                gCtx.beginPath();
+                gCtx.moveTo(30, y);
+                gCtx.lineTo(gW - 10, y);
+                gCtx.stroke();
+            }
+            
+            // Area
+            const areaGrad = gCtx.createLinearGradient(0, 20, 0, gH - 20);
+            areaGrad.addColorStop(0, 'rgba(245, 158, 11, 0.3)');
+            areaGrad.addColorStop(1, 'rgba(245, 158, 11, 0)');
+            
+            gCtx.beginPath();
+            gasHistory.forEach((v, i) => {
+                const x = 30 + ((gW - 40) / (gasHistory.length - 1)) * i;
+                const y = 20 + (gH - 40) - (v / maxGas) * (gH - 40);
+                i === 0 ? gCtx.moveTo(x, y) : gCtx.lineTo(x, y);
+            });
+            gCtx.lineTo(gW - 10, gH - 20);
+            gCtx.lineTo(30, gH - 20);
+            gCtx.closePath();
+            gCtx.fillStyle = areaGrad;
+            gCtx.fill();
+            
+            // Line
+            gCtx.beginPath();
+            gasHistory.forEach((v, i) => {
+                const x = 30 + ((gW - 40) / (gasHistory.length - 1)) * i;
+                const y = 20 + (gH - 40) - (v / maxGas) * (gH - 40);
+                i === 0 ? gCtx.moveTo(x, y) : gCtx.lineTo(x, y);
+            });
+            gCtx.strokeStyle = '#f59e0b';
+            gCtx.lineWidth = 2;
+            gCtx.stroke();
+            
+            // Points
+            gasHistory.forEach((v, i) => {
+                const x = 30 + ((gW - 40) / (gasHistory.length - 1)) * i;
+                const y = 20 + (gH - 40) - (v / maxGas) * (gH - 40);
+                gCtx.beginPath();
+                gCtx.arc(x, y, 4, 0, Math.PI * 2);
+                gCtx.fillStyle = '#f59e0b';
+                gCtx.fill();
+            });
+        }
+        
+        // Comparison
+        let selectedAgents = [];
+        
+        function initComparison() {
+            const select = document.getElementById('comparisonSelect');
+            select.innerHTML = agents.map(a => `
+                <label class="comparison-checkbox">
+                    <input type="checkbox" value="${a.name}" onchange="updateComparison()"> 
+                    ${a.avatar} ${a.name.split('-')[0]}
+                </label>
+            `).join('');
+        }
+        
+        function updateComparison() {
+            const checkboxes = document.querySelectorAll('#comparisonSelect input:checked');
+            selectedAgents = Array.from(checkboxes).map(cb => 
+                agents.find(a => a.name === cb.value)
+            );
+            
+            if (selectedAgents.length > 0) {
+                drawComparisonChart();
+                updateComparisonTable();
+            }
+        }
+        
+        function drawComparisonChart() {
+            const canvas = document.getElementById('comparisonChart');
+            if (!canvas || selectedAgents.length === 0) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = canvas.offsetWidth;
+            const h = canvas.height = 250;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            const metrics = ['Tasks', 'Gas (0.1 ETH)', 'CPU', 'Memory'];
+            const barWidth = (w - 100) / metrics.length;
+            const colors = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899'];
+            
+            metrics.forEach((metric, mi) => {
+                const groupX = 60 + mi * barWidth;
+                const agentBarWidth = (barWidth - 20) / selectedAgents.length;
+                
+                selectedAgents.forEach((agent, ai) => {
+                    let value;
+                    switch(mi) {
+                        case 0: value = agent.tasks / 25; break;
+                        case 1: value = parseFloat(agent.gas) * 100; break;
+                        case 2: value = agent.cpu; break;
+                        case 3: value = agent.memory; break;
+                    }
+                    
+                    const barHeight = (value / 100) * (h - 60);
+                    const x = groupX + ai * agentBarWidth + 5;
+                    const y = h - 30 - barHeight;
+                    
+                    ctx.fillStyle = colors[ai % colors.length];
+                    ctx.beginPath();
+                    ctx.roundRect(x, y, agentBarWidth - 10, barHeight, 3);
+                    ctx.fill();
+                });
+                
+                // Metric label
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.font = '10px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(metric, groupX + barWidth / 2, h - 10);
+            });
+            
+            // Legend
+            selectedAgents.forEach((agent, i) => {
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.beginPath();
+                ctx.arc(60 + i * 100, 15, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#fff';
+                ctx.font = '11px Inter';
+                ctx.textAlign = 'left';
+                ctx.fillText(agent.name.split('-')[0], 70 + i * 100, 19);
+            });
+        }
+        
+        function updateComparisonTable() {
+            const table = document.getElementById('comparisonTable');
+            if (selectedAgents.length === 0) {
+                table.innerHTML = '<p style="padding: 20px; text-align: center; color: var(--text-secondary);">Select agents to compare</p>';
+                return;
+            }
+            
+            table.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agent</th>
+                            <th>Status</th>
+                            <th>Tasks</th>
+                            <th>Gas</th>
+                            <th>CPU</th>
+                            <th>Memory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${selectedAgents.map(a => `
+                            <tr>
+                                <td>${a.avatar} ${a.name}</td>
+                                <td><span class="status-badge ${a.status}"><span class="dot"></span>${a.status}</span></td>
+                                <td class="mono">${a.tasks.toLocaleString()}</td>
+                                <td class="mono">${a.gas}</td>
+                                <td class="mono">${a.cpu}%</td>
+                                <td class="mono">${a.memory}%</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
         
         // ===== KEYBOARD SHORTCUTS =====
         function openShortcutsModal() {
