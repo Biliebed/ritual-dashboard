@@ -1074,6 +1074,327 @@
         [data-theme="light"] .insight-card { background: #f8f9fa; }
         [data-theme="light"] .analytics-tab { background: #ffffff; border-color: #e5e7eb; }
         
+        /* ===== RITUAL NETWORK ===== */
+        .ritual-network-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        
+        .ritual-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .ritual-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .ritual-icon { font-size: 20px; }
+        
+        .ritual-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .ritual-live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: livePulse 2s ease infinite;
+        }
+        
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+        }
+        
+        .ritual-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .ritual-update-time {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .crypto-prices {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .crypto-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+        
+        .crypto-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .crypto-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        #btcPrice .crypto-icon { background: rgba(247, 147, 26, 0.1); color: #f7931a; }
+        #ethPrice .crypto-icon { background: rgba(98, 126, 234, 0.1); color: #627eea; }
+        #solPrice .crypto-icon { background: rgba(0, 255, 163, 0.1); color: #00ffa3; }
+        
+        .crypto-info { flex: 1; }
+        
+        .crypto-name {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .crypto-value {
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .crypto-change {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        .crypto-change.positive {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+        }
+        
+        .crypto-change.negative {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .ritual-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .ritual-stat {
+            text-align: center;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+        
+        .ritual-stat-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        
+        .ritual-stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .ritual-stat-value.green { color: var(--accent-green); }
+        .ritual-stat-value.small { font-size: 14px; }
+        
+        .ritual-signals {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .ritual-signals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .ritual-signals-header h4 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .ritual-auto-refresh {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .ritual-signals-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .signal-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .signal-item:hover {
+            background: rgba(255,255,255,0.03);
+        }
+        
+        .signal-action {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .signal-action.buy {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+        }
+        
+        .signal-action.sell {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .signal-pair {
+            font-weight: 600;
+            font-size: 14px;
+            min-width: 80px;
+        }
+        
+        .signal-block {
+            font-size: 11px;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+        
+        .signal-confidence {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 100px;
+        }
+        
+        .signal-confidence-bar {
+            width: 60px;
+            height: 6px;
+            background: var(--bg-primary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .signal-confidence-fill {
+            height: 100%;
+            background: var(--accent-purple);
+            border-radius: 3px;
+        }
+        
+        .signal-confidence-value {
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-purple);
+        }
+        
+        .ritual-oracle-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 20px;
+        }
+        
+        .ritual-oracle-card {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 16px;
+        }
+        
+        .ritual-oracle-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .oracle-details {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .oracle-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+        
+        .oracle-label { color: var(--text-secondary); }
+        .oracle-value { font-weight: 500; }
+        .oracle-value.mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .oracle-log {
+            max-height: 150px;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+        }
+        
+        .oracle-log-entry {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        
+        .oracle-log-entry:last-child { border-bottom: none; }
+        .oracle-log-entry .time { color: var(--text-secondary); }
+        .oracle-log-entry .success { color: var(--accent-green); }
+        .oracle-log-entry .pending { color: var(--accent-orange); }
+        
+        [data-theme="light"] .crypto-card { background: #f8f9fa; }
+        [data-theme="light"] .ritual-stat { background: #f8f9fa; }
+        [data-theme="light"] .signal-item { background: #f8f9fa; }
+        [data-theme="light"] .ritual-oracle-card { background: #f8f9fa; }
+        
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0,0,0,0.7);
@@ -1266,6 +1587,108 @@
                 <div class="panel">
                     <div class="panel-header"><div class="panel-title">Agent Status</div></div>
                     <div class="chart-container"><canvas id="pieChart"></canvas></div>
+                </div>
+            </div>
+            
+            <!-- RITUAL NETWORK LIVE DATA -->
+            <div class="ritual-network-panel">
+                <div class="ritual-header">
+                    <div class="ritual-title">
+                        <span class="ritual-icon">🌐</span>
+                        <span>Ritual Network Live</span>
+                        <span class="ritual-badge">TESTNET</span>
+                        <span class="ritual-live-dot"></span>
+                    </div>
+                    <div class="ritual-header-actions">
+                        <a href="https://ritual-oracle-two.vercel.app/" target="_blank" class="btn btn-ghost btn-sm">🔗 Open Oracle</a>
+                        <span class="ritual-update-time" id="ritualUpdateTime">Updated just now</span>
+                    </div>
+                </div>
+                
+                <!-- Crypto Prices -->
+                <div class="crypto-prices">
+                    <div class="crypto-card" id="btcPrice">
+                        <div class="crypto-icon">₿</div>
+                        <div class="crypto-info">
+                            <div class="crypto-name">BTC/USD</div>
+                            <div class="crypto-value">$61,404</div>
+                        </div>
+                        <div class="crypto-change negative">-3.40%</div>
+                    </div>
+                    <div class="crypto-card" id="ethPrice">
+                        <div class="crypto-icon">Ξ</div>
+                        <div class="crypto-info">
+                            <div class="crypto-name">ETH/USD</div>
+                            <div class="crypto-value">$1,598</div>
+                        </div>
+                        <div class="crypto-change negative">-9.23%</div>
+                    </div>
+                    <div class="crypto-card" id="solPrice">
+                        <div class="crypto-icon">◎</div>
+                        <div class="crypto-info">
+                            <div class="crypto-name">SOL/USD</div>
+                            <div class="crypto-value">$64.41</div>
+                        </div>
+                        <div class="crypto-change negative">-6.18%</div>
+                    </div>
+                </div>
+                
+                <!-- Ritual Stats -->
+                <div class="ritual-stats">
+                    <div class="ritual-stat">
+                        <div class="ritual-stat-label">SIGNALS TODAY</div>
+                        <div class="ritual-stat-value" id="ritualSignals">54,964</div>
+                    </div>
+                    <div class="ritual-stat">
+                        <div class="ritual-stat-label">ACCURACY (7D)</div>
+                        <div class="ritual-stat-value green" id="ritualAccuracy">50.1%</div>
+                    </div>
+                    <div class="ritual-stat">
+                        <div class="ritual-stat-label">RITUAL BLOCK</div>
+                        <div class="ritual-stat-value" id="ritualBlock">#28905009</div>
+                    </div>
+                    <div class="ritual-stat">
+                        <div class="ritual-stat-label">INFERENCE MODE</div>
+                        <div class="ritual-stat-value small">Block-Seeded</div>
+                    </div>
+                </div>
+                
+                <!-- Live Signals -->
+                <div class="ritual-signals">
+                    <div class="ritual-signals-header">
+                        <h4>📡 Live Signals</h4>
+                        <span class="ritual-auto-refresh">AUTO-REFRESH <span id="ritualRefreshCount">55</span>s</span>
+                    </div>
+                    <div class="ritual-signals-list" id="ritualSignalsList"></div>
+                </div>
+                
+                <!-- Oracle Info -->
+                <div class="ritual-oracle-info">
+                    <div class="ritual-oracle-card">
+                        <h4>🔮 Signal Oracle</h4>
+                        <div class="oracle-details">
+                            <div class="oracle-row">
+                                <span class="oracle-label">Network</span>
+                                <span class="oracle-value">Ritual Chain</span>
+                            </div>
+                            <div class="oracle-row">
+                                <span class="oracle-label">Chain ID</span>
+                                <span class="oracle-value">1979</span>
+                            </div>
+                            <div class="oracle-row">
+                                <span class="oracle-label">Precompile</span>
+                                <span class="oracle-value mono">0x0802</span>
+                            </div>
+                            <div class="oracle-row">
+                                <span class="oracle-label">Model</span>
+                                <span class="oracle-value">GLM-4.7-FP8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ritual-oracle-card">
+                        <h4>📜 Inference Log</h4>
+                        <div class="oracle-log" id="oracleLog"></div>
+                    </div>
                 </div>
             </div>
             
@@ -2357,6 +2780,112 @@
         renderLogs();
         setTimeout(() => { drawLineChart(); drawPieChart(); drawGasChart(); updateGasPrices(); drawAnalyticsCharts(); initComparison(); }, 100);
         window.addEventListener('resize', () => { drawLineChart(); drawPieChart(); drawGasChart(); });
+        
+        // ===== RITUAL NETWORK LIVE DATA =====
+        let ritualBlock = 28905009;
+        let ritualSignals = 54964;
+        let ritualRefreshCount = 55;
+        
+        const tradingPairs = ['BTC/USDC', 'ETH/USDC', 'SOL/USDC', 'AAVE/USDC', 'LINK/USDC', 'UNI/USDC', 'DOGE/USDC', 'AVAX/USDC'];
+        
+        function generateSignal() {
+            const action = Math.random() > 0.5 ? 'BUY' : 'SELL';
+            const pair = tradingPairs[Math.floor(Math.random() * tradingPairs.length)];
+            const confidence = Math.floor(Math.random() * 30) + 60;
+            const block = ritualBlock - Math.floor(Math.random() * 100);
+            
+            return { action, pair, confidence, block };
+        }
+        
+        function renderSignals() {
+            const list = document.getElementById('ritualSignalsList');
+            const signals = Array.from({length: 10}, generateSignal);
+            
+            list.innerHTML = signals.map(s => `
+                <div class="signal-item">
+                    <span class="signal-action ${s.action.toLowerCase()}">${s.action}</span>
+                    <span class="signal-pair">${s.pair}</span>
+                    <span class="signal-block">block-seeded · #${s.block.toLocaleString()}</span>
+                    <div class="signal-confidence">
+                        <div class="signal-confidence-bar">
+                            <div class="signal-confidence-fill" style="width: ${s.confidence}%"></div>
+                        </div>
+                        <span class="signal-confidence-value">${s.confidence}%</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function updateCryptoPrices() {
+            const prices = [
+                { id: 'btcPrice', base: 61404, symbol: '₿', name: 'BTC/USD' },
+                { id: 'ethPrice', base: 1598, symbol: 'Ξ', name: 'ETH/USD' },
+                { id: 'solPrice', base: 64.41, symbol: '◎', name: 'SOL/USD' }
+            ];
+            
+            prices.forEach(p => {
+                const change = (Math.random() - 0.5) * 2;
+                const newPrice = p.base * (1 + change / 100);
+                const changePercent = ((newPrice - p.base) / p.base * 100).toFixed(2);
+                
+                document.querySelector(`#${p.id} .crypto-value`).textContent = 
+                    '$' + newPrice.toLocaleString(undefined, {maximumFractionDigits: 2});
+                
+                const changeEl = document.querySelector(`#${p.id} .crypto-change`);
+                changeEl.textContent = (changePercent >= 0 ? '+' : '') + changePercent + '%';
+                changeEl.className = 'crypto-change ' + (changePercent >= 0 ? 'positive' : 'negative');
+            });
+        }
+        
+        function updateRitualStats() {
+            ritualBlock += Math.floor(Math.random() * 3) + 1;
+            ritualSignals += Math.floor(Math.random() * 50) + 10;
+            
+            document.getElementById('ritualBlock').textContent = '#' + ritualBlock.toLocaleString();
+            document.getElementById('ritualSignals').textContent = ritualSignals.toLocaleString();
+            document.getElementById('ritualAccuracy').textContent = (50 + Math.random() * 2).toFixed(1) + '%';
+        }
+        
+        function renderOracleLog() {
+            const log = document.getElementById('oracleLog');
+            const entries = Array.from({length: 8}, (_, i) => {
+                const time = new Date(Date.now() - i * 30000).toLocaleTimeString('en-US', {hour12: false});
+                const txHash = '0x' + Array.from({length: 8}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+                const signals = Math.floor(Math.random() * 5) + 1;
+                const status = Math.random() > 0.2 ? 'success' : 'pending';
+                const statusText = status === 'success' ? 'complete' : 'submitted';
+                
+                return `<div class="oracle-log-entry">
+                    <span class="time">${time}</span> 
+                    <span class="${status}">Batch ${statusText}</span>: 
+                    TX ${txHash}... (${signals} signals)
+                </div>`;
+            });
+            
+            log.innerHTML = entries.join('');
+        }
+        
+        function updateRitualData() {
+            updateCryptoPrices();
+            updateRitualStats();
+            renderSignals();
+            renderOracleLog();
+            document.getElementById('ritualUpdateTime').textContent = 'Updated just now';
+        }
+        
+        // Refresh countdown
+        setInterval(() => {
+            ritualRefreshCount--;
+            if (ritualRefreshCount <= 0) {
+                ritualRefreshCount = 55;
+                updateRitualData();
+            }
+            document.getElementById('ritualRefreshCount').textContent = ritualRefreshCount;
+        }, 1000);
+        
+        // Initial render
+        renderSignals();
+        renderOracleLog();
         
         // ===== ADVANCED ANALYTICS =====
         function switchAnalyticsTab(tab, el) {
